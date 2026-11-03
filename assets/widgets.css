@@ -1,28 +1,287 @@
-/* Widgets compartidos (comentarios y ventana de correo). Prefijo ptz- para no chocar con estilos de cada página. */
-.ptz-box{--w-bg:#fff;--w-ink:#222;--w-muted:#53565A;--w-line:#D0D0CE;--w-deep:#046A38;--w-focus:#0076A8;--w-ok:#046A38;--w-err:#B3261E;max-width:980px;margin:32px auto;padding:0 20px;color:var(--w-ink);font-family:Aptos,"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
-@media (prefers-color-scheme:dark){.ptz-box{--w-bg:#0F1A12;--w-ink:#E6E6E6;--w-muted:#A7A8AA;--w-line:#2B3B2F;--w-deep:#86BC25;--w-focus:#62B5E5;--w-ok:#86BC25;--w-err:#FF8A80}}
-.ptz-card{border:1px solid var(--w-line);border-radius:10px;padding:18px;background:var(--w-bg)}
-.ptz-card h2{margin:0 0 4px;font-size:1.15rem}
-.ptz-card p.ptz-sub{margin:0 0 14px;color:var(--w-muted);font-size:.9rem}
-.ptz-f{display:flex;flex-direction:column;gap:4px;margin:0 0 12px}
-.ptz-f label{font-size:.85rem;font-weight:600}
-.ptz-f input,.ptz-f select,.ptz-f textarea,.ptz-dlg input[type=email]{font:inherit;color:var(--w-ink);background:var(--w-bg);border:1px solid var(--w-muted);border-radius:6px;padding:9px 10px;min-height:44px;width:100%}
-.ptz-f textarea{min-height:110px;resize:vertical}
-.ptz-r{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-@media (max-width:560px){.ptz-r{grid-template-columns:1fr}}
-.ptz-b{font:inherit;font-weight:700;border:1px solid var(--w-deep);background:var(--w-deep);color:#fff;border-radius:8px;padding:10px 16px;cursor:pointer;min-height:44px}
-@media (prefers-color-scheme:dark){.ptz-b{color:#0F1A12}}
-.ptz-b.ghost{background:transparent;color:var(--w-deep)}
-.ptz-b:disabled{opacity:.6;cursor:not-allowed}
-.ptz-box :focus-visible,.ptz-dlg :focus-visible{outline:2px solid var(--w-focus);outline-offset:2px}
-.ptz-msg{margin:12px 0 0;font-size:.9rem;min-height:1.3em}
-.ptz-msg.ok{color:var(--w-ok)}.ptz-msg.err{color:var(--w-err)}
-.ptz-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.ptz-chk{display:flex;gap:8px;align-items:flex-start;font-size:.85rem;margin:6px 0 12px}
-.ptz-chk input{margin-top:3px;width:18px;height:18px;flex:none}
-dialog.ptz-dlg{border:1px solid var(--w-line,#D0D0CE);border-radius:12px;padding:20px;max-width:440px;width:calc(100% - 32px);background:#fff;color:#222;font-family:Aptos,"Segoe UI",system-ui,sans-serif;--w-bg:#fff;--w-ink:#222;--w-muted:#53565A;--w-line:#D0D0CE;--w-deep:#046A38;--w-focus:#0076A8;--w-ok:#046A38;--w-err:#B3261E}
-@media (prefers-color-scheme:dark){dialog.ptz-dlg{background:#0F1A12;color:#E6E6E6;--w-bg:#0F1A12;--w-ink:#E6E6E6;--w-muted:#A7A8AA;--w-line:#2B3B2F;--w-deep:#86BC25;--w-focus:#62B5E5;--w-ok:#86BC25;--w-err:#FF8A80}}
-dialog.ptz-dlg::backdrop{background:rgba(0,0,0,.5)}
-.ptz-dlg h2{margin:0 0 6px;font-size:1.15rem}
-.ptz-dlg p{margin:0 0 12px;font-size:.9rem;color:var(--w-muted)}
-.ptz-dlg .ptz-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+/* Widgets compartidos (comentarios y ventana de correo).
+   Prefijo ptz- para evitar conflictos con estilos de cada página. */
+
+.ptz-box {
+  --w-bg: #F4FFF8;
+  --w-surface: #EAF3EE;
+  --w-ink: #000F08;
+  --w-muted: #4D4847;
+  --w-line: #8BAAAD;
+  --w-deep: #1C3738;
+  --w-focus: #1C3738;
+  --w-ok: #1C3738;
+  --w-err: #B3261E;
+  --w-on-deep: #F4FFF8;
+
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 0 20px;
+  color: var(--w-ink);
+  font-family: Aptos, "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
+
+/* AUTOMATIC DARK MODE */
+@media (prefers-color-scheme: dark) {
+  .ptz-box {
+    --w-bg: #000F08;
+    --w-surface: #1C3738;
+    --w-ink: #F4FFF8;
+    --w-muted: #8BAAAD;
+    --w-line: #4D4847;
+    --w-deep: #8BAAAD;
+    --w-focus: #F4FFF8;
+    --w-ok: #8BAAAD;
+    --w-err: #FF8A80;
+    --w-on-deep: #000F08;
+  }
+}
+
+/* MANUAL THEME SUPPORT */
+:root[data-theme="dark"] .ptz-box {
+  --w-bg: #000F08;
+  --w-surface: #1C3738;
+  --w-ink: #F4FFF8;
+  --w-muted: #8BAAAD;
+  --w-line: #4D4847;
+  --w-deep: #8BAAAD;
+  --w-focus: #F4FFF8;
+  --w-ok: #8BAAAD;
+  --w-err: #FF8A80;
+  --w-on-deep: #000F08;
+}
+
+:root[data-theme="light"] .ptz-box {
+  --w-bg: #F4FFF8;
+  --w-surface: #EAF3EE;
+  --w-ink: #000F08;
+  --w-muted: #4D4847;
+  --w-line: #8BAAAD;
+  --w-deep: #1C3738;
+  --w-focus: #1C3738;
+  --w-ok: #1C3738;
+  --w-err: #B3261E;
+  --w-on-deep: #F4FFF8;
+}
+
+/* CARDS */
+.ptz-card {
+  border: 1px solid var(--w-line);
+  border-radius: 10px;
+  padding: 18px;
+  background: var(--w-bg);
+}
+
+.ptz-card h2 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+
+.ptz-card p.ptz-sub {
+  margin: 0 0 14px;
+  color: var(--w-muted);
+  font-size: .9rem;
+}
+
+/* FORMS */
+.ptz-f {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 12px;
+}
+
+.ptz-f label {
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.ptz-f input,
+.ptz-f select,
+.ptz-f textarea,
+.ptz-dlg input[type=email] {
+  font: inherit;
+  color: var(--w-ink);
+  background: var(--w-bg);
+  border: 1px solid var(--w-muted);
+  border-radius: 6px;
+  padding: 9px 10px;
+  min-height: 44px;
+  width: 100%;
+}
+
+.ptz-f textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.ptz-r {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 560px) {
+  .ptz-r {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* BUTTONS */
+.ptz-b {
+  font: inherit;
+  font-weight: 700;
+  border: 1px solid var(--w-deep);
+  background: var(--w-deep);
+  color: var(--w-on-deep);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.ptz-b.ghost {
+  background: transparent;
+  color: var(--w-deep);
+}
+
+.ptz-b:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* ACCESSIBILITY */
+.ptz-box :focus-visible,
+.ptz-dlg :focus-visible {
+  outline: 2px solid var(--w-focus);
+  outline-offset: 2px;
+}
+
+/* STATUS MESSAGES */
+.ptz-msg {
+  margin: 12px 0 0;
+  font-size: .9rem;
+  min-height: 1.3em;
+}
+
+.ptz-msg.ok {
+  color: var(--w-ok);
+}
+
+.ptz-msg.err {
+  color: var(--w-err);
+}
+
+/* HONEYPOT */
+.ptz-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* CHECKBOX */
+.ptz-chk {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: .85rem;
+  margin: 6px 0 12px;
+}
+
+.ptz-chk input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+/* DIALOG */
+dialog.ptz-dlg {
+  border: 1px solid var(--w-line);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 440px;
+  width: calc(100% - 32px);
+  background: var(--w-bg);
+  color: var(--w-ink);
+  font-family: Aptos, "Segoe UI", system-ui, sans-serif;
+
+  --w-bg: #F4FFF8;
+  --w-surface: #EAF3EE;
+  --w-ink: #000F08;
+  --w-muted: #4D4847;
+  --w-line: #8BAAAD;
+  --w-deep: #1C3738;
+  --w-focus: #1C3738;
+  --w-ok: #1C3738;
+  --w-err: #B3261E;
+  --w-on-deep: #F4FFF8;
+}
+
+/* DIALOG AUTOMATIC DARK MODE */
+@media (prefers-color-scheme: dark) {
+  dialog.ptz-dlg {
+    --w-bg: #000F08;
+    --w-surface: #1C3738;
+    --w-ink: #F4FFF8;
+    --w-muted: #8BAAAD;
+    --w-line: #4D4847;
+    --w-deep: #8BAAAD;
+    --w-focus: #F4FFF8;
+    --w-ok: #8BAAAD;
+    --w-err: #FF8A80;
+    --w-on-deep: #000F08;
+  }
+}
+
+/* DIALOG MANUAL DARK MODE */
+:root[data-theme="dark"] dialog.ptz-dlg {
+  --w-bg: #000F08;
+  --w-surface: #1C3738;
+  --w-ink: #F4FFF8;
+  --w-muted: #8BAAAD;
+  --w-line: #4D4847;
+  --w-deep: #8BAAAD;
+  --w-focus: #F4FFF8;
+  --w-ok: #8BAAAD;
+  --w-err: #FF8A80;
+  --w-on-deep: #000F08;
+}
+
+/* DIALOG MANUAL LIGHT MODE */
+:root[data-theme="light"] dialog.ptz-dlg {
+  --w-bg: #F4FFF8;
+  --w-surface: #EAF3EE;
+  --w-ink: #000F08;
+  --w-muted: #4D4847;
+  --w-line: #8BAAAD;
+  --w-deep: #1C3738;
+  --w-focus: #1C3738;
+  --w-ok: #1C3738;
+  --w-err: #B3261E;
+  --w-on-deep: #F4FFF8;
+}
+
+dialog.ptz-dlg::backdrop {
+  background: rgba(0, 15, 8, .65);
+}
+
+.ptz-dlg h2 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.ptz-dlg p {
+  margin: 0 0 12px;
+  font-size: .9rem;
+  color: var(--w-muted);
+}
+
+.ptz-dlg .ptz-acts {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}

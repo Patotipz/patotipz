@@ -6,20 +6,101 @@
 <title>Encuentra tu tarjeta de crédito | Patotipz</title>
 <meta name="description" content="Compara más de 100 tarjetas de crédito de México según lo que te importa: CAT, anualidad, beneficios y promociones.">
 <style>
-:root{
-  --bg:#FFFFFF; --surface:#F1F6E4; --card:#FFFFFF; --ink:#222222; --muted:#53565A; --line:#D0D0CE;
-  --deep:#046A38; --green:#86BC25; --bar:#C4D68F; --bar-top:#046A38; --chip:#FFFFFF; --focus:#0076A8; --warn:#9A5B00; --warn-bg:#FFF4DC; --on-deep:#FFFFFF;
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); color-scheme:light;
+:root {
+  /* Backgrounds */
+  --bg: #F4FFF8;
+  --surface: #EAF3EE;
+  --card: #FFFFFF;
+
+  /* Typography */
+  --ink: #000F08;
+  --muted: #4D4847;
+  --line: #8BAAAD;
+
+  /* Primary palette */
+  --deep: #1C3738;
+  --green: #8BAAAD;
+
+  /* Charts */
+  --bar: #8BAAAD;
+  --bar-top: #1C3738;
+
+  /* Components */
+  --chip: #FFFFFF;
+  --focus: #1C3738;
+
+  /* Alerts */
+  --warn: #805000;
+  --warn-bg: #FFF2D9;
+
+  /* Contrast */
+  --on-deep: #F4FFF8;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0F1A12; --surface:#16251A; --card:#132017; --ink:#E6E6E6; --muted:#A7A8AA; --line:#2B3B2F;
-    --deep:#86BC25; --green:#86BC25; --bar:#3E5A32; --bar-top:#86BC25; --chip:#16251A; --focus:#62B5E5; --warn:#F3C269; --warn-bg:#2E2511; --on-deep:#0F1A12; color-scheme:dark;
+
+/* AUTOMATIC DARK MODE */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000F08;
+    --surface: #1C3738;
+    --card: #1C3738;
+
+    --ink: #F4FFF8;
+    --muted: #8BAAAD;
+    --line: #4D4847;
+
+    --deep: #8BAAAD;
+    --green: #8BAAAD;
+
+    --bar: #4D4847;
+    --bar-top: #8BAAAD;
+
+    --chip: #1C3738;
+    --focus: #F4FFF8;
+
+    --warn: #FFD08A;
+    --warn-bg: #332714;
+
+    --on-deep: #000F08;
+
+    color-scheme: dark;
   }
 }
-:root[data-theme="dark"]{
-  --bg:#0F1A12; --surface:#16251A; --card:#132017; --ink:#E6E6E6; --muted:#A7A8AA; --line:#2B3B2F;
-  --deep:#86BC25; --green:#86BC25; --bar:#3E5A32; --bar-top:#86BC25; --chip:#16251A; --focus:#62B5E5; --warn:#F3C269; --warn-bg:#2E2511; --on-deep:#0F1A12; color-scheme:dark;
+
+/* MANUAL DARK MODE */
+:root[data-theme="dark"] {
+  --bg: #000F08;
+  --surface: #1C3738;
+  --card: #1C3738;
+
+  --ink: #F4FFF8;
+  --muted: #8BAAAD;
+  --line: #4D4847;
+
+  --deep: #8BAAAD;
+  --green: #8BAAAD;
+
+  --bar: #4D4847;
+  --bar-top: #8BAAAD;
+
+  --chip: #1C3738;
+  --focus: #F4FFF8;
+
+  --warn: #FFD08A;
+  --warn-bg: #332714;
+
+  --on-deep: #000F08;
+
+  color-scheme: dark;
+}
+
+/* MANUAL LIGHT MODE */
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Aptos,"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;line-height:1.45}

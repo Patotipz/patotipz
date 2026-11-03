@@ -4,43 +4,115 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Patotipz</title>
-<meta name="description" content="Herramientas y documentos útiles de Patotipz.">
+<meta name="description" content="Herramientas gratuitas de finanzas personales para México: tarjetas de crédito, sueldo neto, finiquito, hipoteca y crédito de auto.">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
 <style>
-:root{--bg:#FFFFFF;--surface:#F1F6E4;--ink:#222222;--muted:#53565A;--line:#D0D0CE;--deep:#046A38;--green:#86BC25;--focus:#0076A8;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#0F1A12;--surface:#16251A;--ink:#E6E6E6;--muted:#A7A8AA;--line:#2B3B2F;--deep:#86BC25;--focus:#62B5E5;color-scheme:dark}}
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Aptos,"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;line-height:1.5}
-main{max-width:860px;margin:0 auto;padding:48px 20px 60px}
-h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:0 0 8px;letter-spacing:-.02em}
-h1 span{color:var(--deep)}
-.lead{color:var(--muted);margin:0 0 32px;max-width:56ch;font-size:1.05rem}
-h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 12px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-.card{display:block;border:1px solid var(--line);border-radius:8px;padding:18px;text-decoration:none;color:inherit;background:var(--bg);transition:border-color .15s,transform .15s}
-.card:hover{border-color:var(--deep);transform:translateY(-2px)}
-.card:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.card h3{margin:0 0 6px;font-size:1.15rem}
-.card p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
-.tag{display:inline-block;font-size:.72rem;background:var(--surface);color:var(--deep);border-radius:999px;padding:2px 10px;font-weight:600}
-footer{margin-top:48px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:16px}
-@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+.hero{padding:10px 0 6px}
+.hero h1{font-size:clamp(2.1rem,6vw,3.2rem)}
+.hero h1 span{color:var(--deep)}
+.sec{margin:34px 0 0}
+.sec>h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 12px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+a.tool{display:block;border:1px solid var(--line);border-radius:10px;padding:18px;text-decoration:none;color:inherit;background:var(--bg);transition:border-color .15s,transform .15s}
+a.tool:hover{border-color:var(--deep);transform:translateY(-2px)}
+a.tool h3{margin:0 0 6px;font-size:1.1rem}
+a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+.news{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.news-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line)}
+.news-h h2{margin:0;font-size:1rem}
+.news-h .meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+.news-h .btn{padding:4px 12px;min-height:36px;font-size:.85rem}
+.prompter{height:230px;overflow:hidden;position:relative;padding:0 16px;-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.prompter ul{list-style:none;margin:0;padding:0;animation:pscroll var(--dur,60s) linear infinite}
+.prompter.paused ul,.prompter:hover ul,.prompter:focus-within ul{animation-play-state:paused}
+@keyframes pscroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.prompter li{padding:12px 0;border-bottom:1px solid var(--line)}
+.prompter a{font-size:1.12rem;font-weight:600;text-decoration:none;color:var(--ink);line-height:1.35;display:block}
+.prompter a:hover{color:var(--deep);text-decoration:underline}
+.prompter small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+@media (prefers-reduced-motion:reduce){.prompter{height:auto;max-height:260px;overflow-y:auto;-webkit-mask-image:none;mask-image:none}.prompter ul[aria-hidden=true]{display:none}}
 </style>
 </head>
 <body>
+<header class="site-h">
+  <a class="brand" href="index.html">Pato<span>tipz</span></a>
+  <nav aria-label="Principal">
+    <a href="index.html" aria-current="page">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="auto.html">Crédito de auto</a>
+  </nav>
+</header>
 <main>
-  <h1>Pato<span>tipz</span></h1>
-  <p class="lead">Herramientas y documentos para que tomes mejores decisiones. Pruébalas directo en tu navegador, sin registrarte.</p>
-  <h2>Herramientas</h2>
-  <div class="grid">
-    <a class="card" href="tarjetas.html">
-      <h3>Encuentra tu tarjeta de crédito</h3>
-      <p>Compara más de 100 tarjetas de México según tu perfil: CAT, anualidad, beneficios y promociones vigentes.</p>
-      <span class="tag">Finanzas</span>
-    </a>
-    <!-- Para agregar otra herramienta, copia el bloque <a class="card"> de arriba,
-         cambia el enlace (href), el título y la descripción. -->
+  <div class="hero">
+    <h1>Pato<span>tipz</span></h1>
+    <p class="lead">Herramientas gratuitas para tomar mejores decisiones con tu dinero. Pruébalas directo en tu navegador, sin registrarte.</p>
   </div>
-  <footer>Información general, no es asesoría financiera ni una oferta de crédito. Confirma siempre las condiciones con el emisor.</footer>
+
+  <section class="sec" aria-labelledby="news-t">
+    <div class="news">
+      <div class="news-h">
+        <h2 id="news-t">Economía hoy</h2>
+        <div class="meta"><span id="news-upd">Cargando titulares…</span><button class="btn ghost" id="news-toggle" type="button" aria-pressed="false">Pausar</button></div>
+      </div>
+      <div class="prompter" id="prompter" role="region" aria-label="Titulares de economía en México"></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="tools-t">
+    <h2 id="tools-t">Herramientas</h2>
+    <div class="grid">
+      <a class="tool" href="tarjetas.html"><h3>Encuentra tu tarjeta de crédito</h3><p>Compara más de 100 tarjetas de México según tu perfil: CAT, anualidad, beneficios y promociones.</p><span class="tag">Tarjetas</span></a>
+      <a class="tool" href="sueldo.html"><h3>Sueldo neto, aguinaldo y finiquito</h3><p>Cuánto te queda después de ISR e IMSS, y cuánto te corresponde si dejas un trabajo. Tablas 2026.</p><span class="tag">Trabajo</span></a>
+      <a class="tool" href="hipoteca.html"><h3>Comparador de hipotecas</h3><p>Pon tus cotizaciones lado a lado y descubre cuál cuesta menos en total, con CAT estimado.</p><span class="tag">Vivienda</span></a>
+      <a class="tool" href="auto.html"><h3>Comparador de crédito de auto</h3><p>Agencia o banco: compara mensualidad, intereses, seguro y costo total real.</p><span class="tag">Auto</span></a>
+    </div>
+  </section>
 </main>
+<div id="comments"></div>
+<footer class="site-f"><p>Información general, no es asesoría financiera, legal ni fiscal, ni una oferta de crédito. Confirma siempre las condiciones con la institución o un profesional. Los titulares son enlaces a medios externos.</p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  var box = document.getElementById('prompter'), upd = document.getElementById('news-upd'), tg = document.getElementById('news-toggle');
+  function fmt(iso) { var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function list(items, hidden) {
+    var ul = PTZ.el('ul', hidden ? { 'aria-hidden': 'true' } : {});
+    items.forEach(function (n) {
+      var url = /^https?:\/\//.test(n.url) ? n.url : '#';
+      var a = PTZ.el('a', { href: url, target: '_blank', rel: 'noopener noreferrer', text: n.title });
+      if (hidden) a.tabIndex = -1;
+      var meta = [n.source, n.published ? fmt(n.published) : ''].filter(Boolean).join(' · ');
+      ul.appendChild(PTZ.el('li', {}, [a, PTZ.el('small', { text: meta })]));
+    });
+    return ul;
+  }
+  function paint(data) {
+    var items = (data && data.items) || [];
+    if (!items.length) { upd.textContent = 'Sin titulares por ahora'; return; }
+    box.textContent = '';
+    upd.textContent = data.updated ? 'Actualizado ' + fmt(data.updated) : '';
+    if (items.length < 4) { box.style.height = 'auto'; box.style.webkitMaskImage = 'none'; box.style.maskImage = 'none'; var one = list(items, false); one.style.animation = 'none'; box.appendChild(one); tg.hidden = true; return; }
+    box.appendChild(list(items, false)); box.appendChild(list(items, true));
+    box.querySelectorAll('ul').forEach(function (u) { u.style.setProperty('--dur', Math.max(40, items.length * 7) + 's'); });
+    // un solo bloque de animación: ambos <ul> se mueven juntos dentro de un contenedor
+    var wrap = PTZ.el('div', { style: 'animation:inherit' });
+    var uls = Array.prototype.slice.call(box.querySelectorAll('ul')); uls.forEach(function (u) { u.style.animation = 'none'; wrap.appendChild(u); });
+    wrap.className = 'scroller'; box.appendChild(wrap);
+    wrap.style.animation = 'pscroll ' + Math.max(40, items.length * 7) + 's linear infinite';
+    upd.textContent = data.updated ? 'Actualizado ' + fmt(data.updated) : '';
+  }
+  fetch('data/news.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(paint)
+    .catch(function () { upd.textContent = 'No se pudieron cargar los titulares'; });
+  tg.addEventListener('click', function () {
+    var p = box.classList.toggle('paused'); tg.setAttribute('aria-pressed', p); tg.textContent = p ? 'Reanudar' : 'Pausar';
+    var s = box.querySelector('.scroller'); if (s) s.style.animationPlayState = p ? 'paused' : 'running';
+  });
+  box.addEventListener('mouseenter', function () { var s = box.querySelector('.scroller'); if (s) s.style.animationPlayState = 'paused'; });
+  box.addEventListener('mouseleave', function () { var s = box.querySelector('.scroller'); if (s && !box.classList.contains('paused')) s.style.animationPlayState = 'running'; });
+  box.addEventListener('focusin', function () { var s = box.querySelector('.scroller'); if (s) s.style.animationPlayState = 'paused'; });
+  box.addEventListener('focusout', function () { var s = box.querySelector('.scroller'); if (s && !box.classList.contains('paused')) s.style.animationPlayState = 'running'; });
+  PTZ.mountComments(document.getElementById('comments'), 'Inicio');
+})();
+</script>
 </body>
 </html>

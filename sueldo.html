@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sueldo neto, aguinaldo y finiquito 2026 | Patotipz</title>
+<meta name="description" content="Calcula tu sueldo neto, aguinaldo, finiquito y liquidación en México con las tablas de ISR, subsidio, UMA e IMSS 2026.">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">Pato<span>tipz</span></a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html" aria-current="page">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="auto.html">Crédito de auto</a>
+  </nav>
+</header>
+<main>
+  <h1>Sueldo neto, aguinaldo y finiquito</h1>
+  <p class="lead">Con las tablas de ISR, subsidio al empleo, UMA, salario mínimo e IMSS vigentes en 2026. Los resultados se actualizan mientras escribes.</p>
+
+  <div class="tabs" role="tablist" aria-label="Calculadoras">
+    <button role="tab" id="tab-neto" aria-selected="true" aria-controls="p-neto" type="button">Sueldo neto</button>
+    <button role="tab" id="tab-agui" aria-selected="false" aria-controls="p-agui" type="button" tabindex="-1">Aguinaldo</button>
+    <button role="tab" id="tab-fin" aria-selected="false" aria-controls="p-fin" type="button" tabindex="-1">Finiquito y liquidación</button>
+  </div>
+
+  <!-- SUELDO NETO -->
+  <section id="p-neto" role="tabpanel" aria-labelledby="tab-neto" class="grid2">
+    <form class="card" id="f-neto" novalidate>
+      <h2>Tus datos</h2>
+      <div class="row2">
+        <div class="field"><label for="n-bruto">Sueldo bruto</label><input id="n-bruto" type="number" inputmode="decimal" min="0" step="0.01" value="25000"></div>
+        <div class="field"><label for="n-frec">Se paga</label><select id="n-frec"><option value="mensual">Cada mes</option><option value="quincenal">Cada quincena</option><option value="semanal">Cada semana</option></select></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="n-ant">Año de antigüedad</label><input id="n-ant" type="number" inputmode="numeric" min="1" max="40" step="1" value="1"><small>Define tus días de vacaciones y tu salario base de cotización.</small></div>
+        <div class="field"><label for="n-ag">Días de aguinaldo</label><input id="n-ag" type="number" inputmode="numeric" min="15" max="90" step="1" value="15"><small>La ley exige mínimo 15.</small></div>
+      </div>
+    </form>
+    <div class="card soft" aria-live="polite" id="o-neto"></div>
+  </section>
+
+  <!-- AGUINALDO -->
+  <section id="p-agui" role="tabpanel" aria-labelledby="tab-agui" class="grid2 hidden">
+    <form class="card" id="f-agui" novalidate>
+      <h2>Tus datos</h2>
+      <div class="field"><label for="a-sueldo">Sueldo bruto mensual</label><input id="a-sueldo" type="number" inputmode="decimal" min="0" step="0.01" value="25000"></div>
+      <div class="row2">
+        <div class="field"><label for="a-dias">Días de aguinaldo</label><input id="a-dias" type="number" inputmode="numeric" min="15" max="90" value="15"></div>
+        <div class="field"><label for="a-trab">Días trabajados en el año</label><input id="a-trab" type="number" inputmode="numeric" min="1" max="365" value="365"><small>365 si trabajaste todo el año.</small></div>
+      </div>
+    </form>
+    <div class="card soft" aria-live="polite" id="o-agui"></div>
+  </section>
+
+  <!-- FINIQUITO Y LIQUIDACIÓN -->
+  <section id="p-fin" role="tabpanel" aria-labelledby="tab-fin" class="grid2 hidden">
+    <form class="card" id="f-fin" novalidate>
+      <h2>Tus datos</h2>
+      <div class="field"><label for="f-motivo">Motivo de la baja</label>
+        <select id="f-motivo"><option value="renuncia">Renuncia voluntaria</option><option value="despido_injustificado">Despido injustificado</option><option value="despido_justificado">Despido justificado o fin de contrato</option></select></div>
+      <div class="field"><label for="f-sueldo">Sueldo bruto mensual</label><input id="f-sueldo" type="number" inputmode="decimal" min="0" step="0.01" value="25000"></div>
+      <div class="row2">
+        <div class="field"><label for="f-ing">Fecha de ingreso</label><input id="f-ing" type="date"></div>
+        <div class="field"><label for="f-baja">Fecha de baja</label><input id="f-baja" type="date"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="f-pend">Días de sueldo sin pagar</label><input id="f-pend" type="number" inputmode="numeric" min="0" value="0"></div>
+        <div class="field"><label for="f-ag">Días de aguinaldo</label><input id="f-ag" type="number" inputmode="numeric" min="15" max="90" value="15"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="f-vt">Vacaciones ya tomadas este año de servicio (días)</label><input id="f-vt" type="number" inputmode="decimal" min="0" value="0"></div>
+        <div class="field"><label for="f-vp">Vacaciones pendientes de años anteriores (días)</label><input id="f-vp" type="number" inputmode="decimal" min="0" value="0"></div>
+      </div>
+      <div class="field"><label><input id="f-front" type="checkbox"> Trabajo en la zona libre de la frontera norte</label><small>Cambia el tope de salario mínimo para la prima de antigüedad.</small></div>
+    </form>
+    <div class="card soft" aria-live="polite" id="o-fin"></div>
+  </section>
+
+  <p class="note">Cifras 2026 usadas: UMA diaria $117.31 (INEGI), salario mínimo general $315.04 y frontera norte $440.87 (CONASAMI), tarifa mensual del Art. 96 LISR (Anexo 8 RMF 2026), subsidio al empleo $535.65 para ingresos de hasta $11,492.66 al mes e IMSS obrero según la Ley del Seguro Social. La retención real la calcula tu empleador y puede variar por centavos o por prestaciones que aquí no se incluyen (fondo de ahorro, crédito Infonavit, pensión alimenticia, etc.).</p>
+</main>
+
+<div id="comments"></div>
+<footer class="site-f"><p>Información general, no es asesoría financiera, legal ni fiscal. Para un caso de despido, consulta a la Procuraduría de la Defensa del Trabajo o a un abogado laboral.</p></footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/laboral.js"></script>
+<script>
+(function () {
+  var M = PTZ.money, E = PTZ.el;
+  function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+  function tbl(rows) {
+    var b = E('tbody');
+    rows.forEach(function (r) { b.appendChild(E('tr', { class: r.cls || '' }, [E('th', { scope: 'row', text: r.k, style: 'font-weight:' + (r.cls === 'tot' ? '800' : '400') }), E('td', { class: 'n', text: r.v })])); });
+    return E('table', { class: 't' }, [b]);
+  }
+  function show(host, nodes) { host.textContent = ''; nodes.forEach(function (n) { host.appendChild(n); }); }
+  function emailBtn(host, getP) {
+    var b = E('button', { class: 'btn ghost', type: 'button', text: 'Enviarme mis resultados' });
+    host.appendChild(E('div', { class: 'actions' }, [b])); PTZ.mountEmail(b, getP);
+  }
+  var last = {};
+
+  /* Sueldo neto */
+  function renderNeto() {
+    var host = document.getElementById('o-neto'), frec = document.getElementById('n-frec').value;
+    var bruto = num('n-bruto');
+    if (!bruto) { show(host, [E('p', { text: 'Escribe tu sueldo bruto para ver el cálculo.' })]); last.neto = null; return; }
+    var r = Laboral.sueldoNeto({ bruto: bruto, frecuencia: frec, anioServicio: num('n-ant') || 1, diasAguinaldo: num('n-ag') || 15 });
+    var etiqueta = { mensual: 'al mes', quincenal: 'por quincena', semanal: 'por semana' }[frec];
+    var rows = [
+      { k: 'Sueldo bruto mensual', v: M(r.brutoMensual) }, { k: 'IMSS (cuotas del trabajador)', v: '− ' + M(r.imss) },
+      { k: 'ISR según tarifa', v: '− ' + M(r.isrTarifa) }, { k: 'Subsidio al empleo', v: '+ ' + M(r.subsidio) },
+      { k: 'Neto mensual', v: M(r.netoMensual), cls: 'tot' }
+    ];
+    var kids = [E('div', { class: 'kpi-l', text: 'Te quedan ' + etiqueta }), E('div', { class: 'big', text: M(r.netoPeriodo) }),
+      E('p', { class: 'note', text: 'Descuentos totales: ' + PTZ.pct(r.tasaEfectiva * 100, 1) + ' de tu sueldo bruto.' }), tbl(rows)];
+    if (frec !== 'mensual') kids.push(E('p', { class: 'note', text: 'Se calcula con la tarifa mensual y se divide entre los periodos del mes. La retención por periodo puede diferir unos pesos.' }));
+    show(host, kids); emailBtn(host, function () { return last.neto; });
+    last.neto = { title: 'Mi sueldo neto 2026', lines: [
+      { k: 'Sueldo bruto (' + frec + ')', v: M(bruto) }, { k: 'Sueldo bruto mensual', v: M(r.brutoMensual) }, { k: 'IMSS trabajador', v: M(r.imss) },
+      { k: 'ISR según tarifa', v: M(r.isrTarifa) }, { k: 'Subsidio al empleo', v: M(r.subsidio) }, { k: 'Neto mensual', v: M(r.netoMensual) }, { k: 'Neto ' + etiqueta, v: M(r.netoPeriodo) } ] };
+  }
+
+  /* Aguinaldo */
+  function renderAgui() {
+    var host = document.getElementById('o-agui'), s = num('a-sueldo');
+    if (!s) { show(host, [E('p', { text: 'Escribe tu sueldo mensual para ver el cálculo.' })]); last.agui = null; return; }
+    var r = Laboral.aguinaldo({ salarioMensual: s, diasAguinaldo: num('a-dias') || 15, diasTrabajados: num('a-trab') || 365 });
+    var rows = [{ k: 'Días que te corresponden', v: String(r.dias) }, { k: 'Aguinaldo bruto', v: M(r.bruto) }, { k: 'Parte exenta (30 UMA)', v: M(r.exento) },
+      { k: 'Parte gravable', v: M(r.gravable) }, { k: 'ISR estimado', v: '− ' + M(r.isr) }, { k: 'Aguinaldo neto', v: M(r.neto), cls: 'tot' }];
+    show(host, [E('div', { class: 'kpi-l', text: 'Aguinaldo neto estimado' }), E('div', { class: 'big', text: M(r.neto) }), tbl(rows),
+      E('p', { class: 'note', text: 'El aguinaldo debe pagarse a más tardar el 20 de diciembre. El ISR se estima con el método del Art. 174 del Reglamento de la LISR.' })]);
+    emailBtn(host, function () { return last.agui; });
+    last.agui = { title: 'Mi aguinaldo 2026', lines: rows.map(function (x) { return { k: x.k, v: x.v }; }) };
+  }
+
+  /* Finiquito y liquidación */
+  function renderFin() {
+    var host = document.getElementById('o-fin'), s = num('f-sueldo'), ing = document.getElementById('f-ing').value, baja = document.getElementById('f-baja').value;
+    if (!s || !ing || !baja) { show(host, [E('p', { text: 'Completa sueldo, fecha de ingreso y fecha de baja.' })]); last.fin = null; return; }
+    if (baja < ing) { show(host, [E('p', { class: 'warn', text: 'La fecha de baja no puede ser anterior a la de ingreso.' })]); last.fin = null; return; }
+    var motivo = document.getElementById('f-motivo').value;
+    var r = Laboral.liquidacion({ salarioMensual: s, ingreso: ing, baja: baja, diasPendientes: num('f-pend'), diasAguinaldo: num('f-ag') || 15,
+      vacTomadas: num('f-vt'), vacPendientes: num('f-vp'), motivo: motivo, zonaFrontera: document.getElementById('f-front').checked });
+    var ant = r.finiquito.ant;
+    var kids = [E('div', { class: 'kpi-l', text: 'Total neto estimado' }), E('div', { class: 'big', text: M(r.netoTotal) }),
+      E('p', { class: 'note', text: 'Antigüedad: ' + ant.cumplidos + ' años y ' + Math.round(ant.fraccion * 12) + ' meses aprox.' })];
+    var lines = [{ k: 'Antigüedad', v: ant.cumplidos + ' años (' + Laboral.r2(ant.total) + ' años en total)' }, { k: 'Finiquito', h: true }];
+    kids.push(E('h2', { text: 'Finiquito', style: 'margin-top:14px' }));
+    var fr = r.finiquito.conceptos.map(function (c) { return { k: c.k, v: M(c.v) }; });
+    fr.push({ k: 'Subtotal finiquito', v: M(r.finTot.bruto), cls: 'tot' }); kids.push(tbl(fr));
+    fr.forEach(function (x) { lines.push({ k: x.k, v: x.v }); });
+    if (r.conceptosSep.length) {
+      kids.push(E('h2', { text: motivo === 'renuncia' ? 'Prima de antigüedad' : 'Indemnización y prima de antigüedad', style: 'margin-top:14px' }));
+      var sr = r.conceptosSep.map(function (c) { return { k: c.k, v: M(c.v) }; });
+      sr.push({ k: 'Parte exenta (90 UMA por año)', v: M(r.sepExento) }); sr.push({ k: 'Subtotal', v: M(r.sepBruto), cls: 'tot' });
+      kids.push(tbl(sr)); lines.push({ k: 'Indemnización y prima', h: true }); sr.forEach(function (x) { lines.push({ k: x.k, v: x.v }); });
+    } else if (motivo === 'renuncia') {
+      kids.push(E('p', { class: 'note', text: 'Con menos de 15 años de antigüedad, la renuncia voluntaria no genera prima de antigüedad.' }));
+    }
+    var tot = [{ k: 'Total bruto', v: M(r.brutoTotal) }, { k: 'ISR estimado', v: '− ' + M(r.isrTotal) }, { k: 'Total neto', v: M(r.netoTotal), cls: 'tot' }];
+    kids.push(E('h2', { text: 'Resumen', style: 'margin-top:14px' })); kids.push(tbl(tot));
+    lines.push({ k: 'Resumen', h: true }); tot.forEach(function (x) { lines.push({ k: x.k, v: x.v }); });
+    if (motivo === 'despido_injustificado') kids.push(E('p', { class: 'note', text: 'Los 20 días por año aplican a contratos por tiempo indeterminado. Si hay reinstalación o juicio, el cálculo puede incluir salarios caídos, que aquí no se consideran.' }));
+    kids.push(E('p', { class: 'note', text: 'El ISR es una estimación (Art. 174 RISR para el finiquito y Art. 95 LISR para la indemnización). Confirma el monto exacto con tu empleador o un abogado laboral.' }));
+    show(host, kids); emailBtn(host, function () { return last.fin; });
+    last.fin = { title: 'Mi finiquito / liquidación 2026', lines: lines };
+  }
+
+  /* Tabs con teclado */
+  var tabs = ['neto', 'agui', 'fin'];
+  function select(name) {
+    tabs.forEach(function (t) {
+      var on = t === name, b = document.getElementById('tab-' + t);
+      b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+      document.getElementById('p-' + t).classList.toggle('hidden', !on);
+    });
+    try { history.replaceState(null, '', '#' + name); } catch (e) {}
+  }
+  tabs.forEach(function (t, i) {
+    var b = document.getElementById('tab-' + t);
+    b.addEventListener('click', function () { select(t); });
+    b.addEventListener('keydown', function (ev) {
+      var j = ev.key === 'ArrowRight' ? (i + 1) % 3 : ev.key === 'ArrowLeft' ? (i + 2) % 3 : -1;
+      if (j >= 0) { ev.preventDefault(); select(tabs[j]); document.getElementById('tab-' + tabs[j]).focus(); }
+    });
+  });
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  var hoy = new Date(), ini = new Date(hoy.getFullYear() - 3, hoy.getMonth(), hoy.getDate());
+  document.getElementById('f-baja').value = iso(hoy); document.getElementById('f-ing').value = iso(ini);
+  [['f-neto', renderNeto], ['f-agui', renderAgui], ['f-fin', renderFin]].forEach(function (p) {
+    var f = document.getElementById(p[0]); f.addEventListener('input', p[1]); f.addEventListener('submit', function (e) { e.preventDefault(); });
+  });
+  renderNeto(); renderAgui(); renderFin();
+  var h = location.hash.slice(1); if (tabs.indexOf(h) >= 0) select(h);
+  PTZ.mountComments(document.getElementById('comments'), 'Sueldo y finiquito');
+})();
+</script>
+</body>
+</html>

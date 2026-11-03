@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparador de crédito automotriz | Patotipz</title>
+<meta name="description" content="Compara hasta tres ofertas de crédito para auto en México: mensualidad, intereses, CAT estimado y costo total real.">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">Pato<span>tipz</span></a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="auto.html" aria-current="page">Crédito de auto</a>
+  </nav>
+</header>
+<main>
+  <h1>Comparador de crédito automotriz</h1>
+  <p class="lead">Captura las cotizaciones de la agencia y de los bancos y mira cuál te sale realmente más barata, no solo la de menor tasa: se cuentan enganche, intereses, seguro, comisión y gastos.</p>
+  <div id="app"></div>
+
+  <details class="ref">
+    <summary>Rangos de referencia del mercado (aproximados)</summary>
+    <div class="tbl-wrap"><table class="t" style="margin-top:10px">
+      <thead><tr><th scope="col">Concepto</th><th scope="col" class="n">Rango aproximado</th></tr></thead>
+      <tbody>
+        <tr><th scope="row" style="font-weight:400">Tasa anual (bancos y financieras de marca)</th><td class="n">desde 11.9% hasta 19% o más</td></tr>
+        <tr><th scope="row" style="font-weight:400">CAT publicado</th><td class="n">17.5% a 30%</td></tr>
+        <tr><th scope="row" style="font-weight:400">Enganche mínimo</th><td class="n">5% a 20%</td></tr>
+        <tr><th scope="row" style="font-weight:400">Plazos</th><td class="n">36 a 72 meses</td></tr>
+        <tr><th scope="row" style="font-weight:400">Comisión por apertura</th><td class="n">rara vez más de 3%</td></tr>
+      </tbody></table></div>
+    <p class="note">Compilado en noviembre de 2026 del comparador Financiera.mx (la tabla no indica su fecha de actualización). Son referencias, no ofertas: las tasas "desde" aplican a los mejores perfiles y cambian seguido. Muchas veces la agencia ofrece tasa preferencial de la marca; compárala contra la de un banco. Consulta también en <a href="https://www.condusef.gob.mx" rel="noopener">CONDUSEF</a>.</p>
+  </details>
+</main>
+<div id="comments"></div>
+<footer class="site-f"><p>Información general, no es asesoría financiera ni una oferta de crédito. Las condiciones finales las define cada institución.</p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/credito.js"></script>
+<script src="assets/comparador.js"></script>
+<script>
+PTZComp.init({
+  rootId: 'app', prefix: 'a', sharedTitle: 'Tu compra', precioLabel: 'Precio del auto ($)', precioDef: 350000,
+  gastosLabel: 'Otros gastos iniciales (%)', gastosDef: 0, gastosHint: 'Placas, tenencia, accesorios u otros, como % del precio.',
+  plazoUnit: 'meses', plazos: [12, 24, 36, 48, 60, 72], seguroLabel: 'Seguro del auto (anual, $)', seguroHint: 'El crédito exige seguro vigente. Aquí se reparte en 12 pagos.', seguroAnual: true,
+  emailTitle: 'Comparación de créditos de auto',
+  offers: [
+    { nombre: 'Agencia', eng: 20, tasa: 14, plazo: 48, com: 2, seg: 12000 },
+    { nombre: 'Banco', eng: 25, tasa: 12.5, plazo: 48, com: 3, seg: 12000 },
+    { nombre: 'Otra opción', eng: 30, tasa: 11.9, plazo: 36, com: 2, seg: 12000 }
+  ]
+});
+PTZ.mountComments(document.getElementById('comments'), 'Crédito de auto');
+</script>
+</body>
+</html>

@@ -77,6 +77,9 @@ select:focus-visible, textarea:focus-visible, summary:focus-visible {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 800;
   font-size: 1.25rem;
   text-decoration: none;
@@ -84,7 +87,16 @@ select:focus-visible, textarea:focus-visible, summary:focus-visible {
   letter-spacing: -.02em;
 }
 
-.brand span { color: var(--deep); }
+.brand span {
+  color: var(--deep);
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+}
 
 .site-h nav {
   display: flex;

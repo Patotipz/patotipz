@@ -4,5 +4,5 @@ window.PTZ_CONFIG = {
   // Comentarios y preguntas (Web3Forms, gratis): pega aquí tu "Access Key" de https://web3forms.com
   web3formsKey: '78cc436b-236b-42af-add9-6f1c4139b99a',
   // Envío de resultados al correo del visitante (EmailJS, gratis hasta 200 correos al mes)
-  emailjs: { serviceId: 'JRawHEB707fe49Mav', templateId: 'JRawHEB707fe49Mav', publicKey: 'JRawHEB707fe49Mav' }
+  emailjs: { serviceId: 'service_sbxylsm', templateId: 'template_90zsifc', publicKey: 'JRawHEB707fe49Mav' }
 };

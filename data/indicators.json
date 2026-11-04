@@ -1,1 +1,51 @@
-{"updated": null, "source": "Banco de México (SIE)", "items": []}
+{
+ "updated": "2026-11-04T04:16:17.016673+00:00",
+ "source": "Banco de México (SIE)",
+ "items": [
+  {
+   "id": "SF43718",
+   "label": "Dólar (FIX)",
+   "kind": "mxn",
+   "decimals": 4,
+   "value": 18.7592,
+   "date": "2026-11-03",
+   "title": "Tipo de cambio                                          Pesos por dólar E.U.A. Tipo de cambio para solventar obligaciones denominadas en moneda extranjera Fecha de determinación (FIX)"
+  },
+  {
+   "id": "SF43783",
+   "label": "TIIE 28 días",
+   "kind": "pct",
+   "decimals": 4,
+   "value": 6.9167,
+   "date": "2026-11-04",
+   "title": "TIIE a 28 días Tasa de interés en por ciento anual"
+  },
+  {
+   "id": "SF282",
+   "label": "CETES 28 días",
+   "kind": "pct",
+   "decimals": 2,
+   "value": 6.16,
+   "date": "2026-10-01",
+   "title": "Cetes 28 días Tasa de rendimiento promedio mensual, en por ciento anual"
+  },
+  {
+   "id": "SP68257",
+   "label": "UDI",
+   "kind": "mxn",
+   "decimals": 6,
+   "value": 8.897671,
+   "date": "2026-11-10",
+   "title": "Valor de UDIS"
+  },
+  {
+   "id": "SP30578",
+   "label": "Inflación anual",
+   "kind": "pct",
+   "decimals": 2,
+   "value": 3.45,
+   "date": "2026-09-01",
+   "title": "Índice Nacional de Precios al consumidor variación anual"
+  }
+ ]
+}

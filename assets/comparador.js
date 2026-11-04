@@ -36,7 +36,38 @@
 
     var out = E('div', { class: 'card soft', 'aria-live': 'polite' });
     host.appendChild(out);
-    var state = { res: null, payload: null };
+    var state = { res: null, ofs: null, payload: null };
+
+    /* Compartir: el estado de todos los campos viaja en el hash del enlace */
+    function collect() {
+      var o = {};
+      host.querySelectorAll('input[id],select[id]').forEach(function (el) { if (el.id.indexOf(P) === 0 && el.id !== P + '-yr') o[el.id] = el.value; });
+      return o;
+    }
+    function applyHash() {
+      try {
+        var h = location.hash.slice(1); if (h.indexOf('c=') !== 0) return;
+        var o = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h.slice(2))))));
+        Object.keys(o).forEach(function (id) {
+          var el = document.getElementById(id); if (!el || id.indexOf(P) !== 0 || el.id === P + '-yr') return;
+          var v = String(o[id]).slice(0, 60);
+          if (el.tagName === 'SELECT') { var ok = Array.prototype.some.call(el.options, function (op) { return op.value === v; }); if (ok) el.value = v; }
+          else if (el.type === 'number') { if (isFinite(parseFloat(v)) && parseFloat(v) >= 0) el.value = v; }
+          else el.value = v;
+        });
+      } catch (e) { /* enlace dañado: se ignora */ }
+    }
+    function shareUrl() { return location.href.split('#')[0] + '#c=' + encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(collect()))))); }
+    function csvRows() {
+      var rd = function (n) { return Math.round(n * 100) / 100; };
+      var rows = [['Oferta', 'Precio', 'Enganche %', 'Enganche $', 'Tasa anual %', 'Plazo (meses)', 'Monto del crédito', 'Mensualidad (capital + interés)', 'Mensualidad con seguros', 'Intereses totales', 'Seguros totales', 'Comisión por apertura', 'Gastos iniciales', 'Costo total', 'CAT estimado %', 'Meses reales', 'Abono extra mensual', 'Intereses ahorrados por abono extra']];
+      state.res.forEach(function (r, i) {
+        var I = state.ofs[i].input;
+        rows.push([state.ofs[i].nombre, rd(I.precio), I.enganchePct, rd(r.enganche), I.tasa, I.plazoMeses, rd(r.monto), rd(r.cuota), rd(r.cuotaTotal), rd(r.intereses), rd(r.segurosTotal), rd(r.comision), rd(r.gastos), rd(r.costoTotal), r.catEstimado == null ? '' : rd(r.catEstimado), r.meses, I.extra, rd(r.ahorroIntereses)]);
+      });
+      return rows;
+    }
+    applyHash();
 
     function read() {
       var precio = parseFloat(document.getElementById(P + '-precio').value) || 0;
@@ -121,7 +152,15 @@
       det.appendChild(sel); det.appendChild(yhost); out.appendChild(det);
 
       var b = E('button', { class: 'btn ghost', type: 'button', text: 'Enviarme mis resultados' });
-      out.appendChild(E('div', { class: 'actions' }, [b])); PTZ.mountEmail(b, function () { return state.payload; });
+      var bCsv = E('button', { class: 'btn ghost', type: 'button', text: 'Descargar CSV' });
+      var bLink = E('button', { class: 'btn ghost', type: 'button', text: 'Copiar enlace para compartir' });
+      var st = E('span', { class: 'note', role: 'status', 'aria-live': 'polite', style: 'align-self:center;margin:0' });
+      bCsv.addEventListener('click', function () { PTZ.downloadCSV(cfg.csvName, csvRows()); st.textContent = 'Archivo descargado.'; });
+      bLink.addEventListener('click', function () {
+        var u = shareUrl();
+        PTZ.copyText(u).then(function () { st.textContent = 'Enlace copiado.'; }, function () { window.prompt('Copia este enlace:', u); });
+      });
+      out.appendChild(E('div', { class: 'actions' }, [b, bCsv, bLink, st])); PTZ.mountEmail(b, function () { return state.payload; });
 
       var lines = [{ k: cfg.precioLabel, v: M(ofs[0].input.precio) }];
       res.forEach(function (r, i) {
@@ -131,7 +170,7 @@
         lines.push({ k: 'Intereses totales', v: M(r.intereses) }); lines.push({ k: 'Costo total (todo incluido)', v: M(r.costoTotal) });
         lines.push({ k: 'CAT estimado', v: r.catEstimado == null ? 'n/d' : PTZ.pct(r.catEstimado, 1) });
       });
-      state.res = res; state.payload = { title: cfg.emailTitle, lines: lines };
+      state.res = res; state.ofs = ofs; state.payload = { title: cfg.emailTitle, lines: lines };
     }
     host.addEventListener('input', render);
     host.addEventListener('change', render);

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador de crédito Infonavit | Patotipz</title>
+<meta name="description" content="Simula tu crédito Infonavit: mensualidad, intereses totales, plazo permitido por tu edad y comparación contra un crédito bancario.">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">
+    <img src="assets/duck.png" alt="PatoTipz Logo" class="brand-logo">
+    <span>Pato<span>tipz</span></span>
+  </a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html" aria-current="page">Infonavit</a><a href="auto.html">Crédito de auto</a>
+  </nav>
+</header>
+<main>
+  <h1>Simulador de crédito Infonavit</h1>
+  <p class="lead">Calcula la mensualidad y el costo de tu crédito con la tasa que te muestre tu precalificación, revisa el plazo que tu edad permite y compáralo contra un banco.</p>
+  <div class="grid2">
+    <form class="card" id="f-inf" novalidate>
+      <h2>Tus datos</h2>
+      <div class="row2">
+        <div class="field"><label for="i-sal">Salario mensual bruto ($)</label><input id="i-sal" type="number" inputmode="decimal" min="0" step="any" value="20000"></div>
+        <div class="field"><label for="i-edad">Edad</label><input id="i-edad" type="number" inputmode="numeric" min="18" max="70" value="32"></div>
+      </div>
+      <div class="field"><label for="i-sexo">Para la regla de edad y plazo</label><select id="i-sexo"><option value="h">Hombre (edad + plazo hasta 70)</option><option value="m">Mujer (edad + plazo hasta 75)</option></select></div>
+      <div class="row2">
+        <div class="field"><label for="i-monto">Monto del crédito ($)</label><input id="i-monto" type="number" inputmode="decimal" min="0" step="any" value="900000"><small>Tu monto real aparece en la precalificación de Mi Cuenta Infonavit.</small></div>
+        <div class="field"><label for="i-tasa">Tasa anual fija (%)</label><input id="i-tasa" type="number" inputmode="decimal" min="0" max="30" step="any" value="7"><small>Entre 3.69% y 10.45% según tu nivel salarial.</small></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="i-plazo">Plazo (años)</label><input id="i-plazo" type="number" inputmode="numeric" min="1" max="30" value="25"></div>
+        <div class="field"><label for="i-extra">Abono extra mensual ($, opcional)</label><input id="i-extra" type="number" inputmode="decimal" min="0" step="any" value="0"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="i-precio">Precio de la vivienda ($, opcional)</label><input id="i-precio" type="number" inputmode="decimal" min="0" step="any" value="0"></div>
+        <div class="field"><label for="i-ahorro">Ahorro propio para el enganche ($, opcional)</label><input id="i-ahorro" type="number" inputmode="decimal" min="0" step="any" value="0"></div>
+      </div>
+      <div class="field"><label for="i-banco">Tasa de un banco para comparar (%)</label><input id="i-banco" type="number" inputmode="decimal" min="0" max="40" step="any" value="10.5"><small>Ejemplo. Escribe la que te cotizaron. Los bancos suelen ofrecer hasta 20 años.</small></div>
+    </form>
+    <div class="card soft" aria-live="polite" id="o-inf"></div>
+  </div>
+
+  <details class="ref">
+    <summary>Datos oficiales de referencia (Infonavit)</summary>
+    <div class="tbl-wrap"><table class="t" style="margin-top:10px">
+      <thead><tr><th scope="col">Concepto</th><th scope="col" class="n">Dato</th></tr></thead>
+      <tbody>
+        <tr><th scope="row" style="font-weight:400">Monto máximo, crédito tradicional</th><td class="n">$2,935,002.35</td></tr>
+        <tr><th scope="row" style="font-weight:400">Plazo</th><td class="n">1 a 30 años</td></tr>
+        <tr><th scope="row" style="font-weight:400">Tasa de interés</th><td class="n">fija, 3.69% a 10.45% según nivel salarial</td></tr>
+        <tr><th scope="row" style="font-weight:400">Regla de edad y plazo</th><td class="n">edad + plazo no mayor a 70 (hombres) o 75 (mujeres)</td></tr>
+      </tbody></table></div>
+    <p class="note">Tomado de la página de créditos para comprar vivienda del Infonavit (consultada en noviembre de 2026; los montos suelen actualizarse cada año). La tasa que te toca depende de tu salario y está en la tabla de tasas diferenciada y en tu precalificación en Mi Cuenta Infonavit. Este simulador usa pagos fijos de capital e interés. Tu descuento real puede incluir otros conceptos, como seguros, y el monto que te prestan depende de tu salario, tu ahorro en la Subcuenta de Vivienda, tu edad y tu capacidad de pago. Confirma todo en <a href="https://portalmx.infonavit.org.mx" rel="noopener">el portal del Infonavit</a>.</p>
+  </details>
+</main>
+<div id="comments"></div>
+<footer class="site-f"><p>Información general, no es asesoría financiera ni una oferta de crédito. Las condiciones finales las define cada institución. <a href="privacidad.html">Aviso de privacidad</a></p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/credito.js"></script>
+<script>
+(function () {
+  var M = PTZ.money, E = PTZ.el, MAX = 2935002.35;
+  function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+  function tbl(rows, head) {
+    var b = E('tbody');
+    rows.forEach(function (r) { var tr = E('tr', { class: r.cls || '' }, [E('th', { scope: 'row', text: r.k, style: 'font-weight:' + (r.cls === 'tot' ? '800' : '400') })]); r.v.forEach(function (x) { tr.appendChild(E('td', { class: 'n', text: x })); }); b.appendChild(tr); });
+    var t = E('table', { class: 't' }, [b]);
+    if (head) { var h = E('tr', {}, [E('th', { scope: 'col', text: '' })]); head.forEach(function (x) { h.appendChild(E('th', { scope: 'col', class: 'n', text: x })); }); t.insertBefore(E('thead', {}, [h]), b); }
+    return E('div', { class: 'tbl-wrap' }, [t]);
+  }
+  var host = document.getElementById('o-inf'), last = null;
+  function render() {
+    host.textContent = '';
+    var sal = num('i-sal'), edad = num('i-edad'), monto = num('i-monto'), tasa = parseFloat(document.getElementById('i-tasa').value) || 0;
+    var plazo = Math.round(num('i-plazo')), extra = num('i-extra'), precio = num('i-precio'), ahorro = num('i-ahorro'), tb = parseFloat(document.getElementById('i-banco').value) || 0;
+    var limite = document.getElementById('i-sexo').value === 'm' ? 75 : 70;
+    if (!monto || !plazo || !edad) { host.appendChild(E('p', { text: 'Completa monto, plazo y edad para ver el cálculo.' })); last = null; return; }
+    var notes = [], maxPlazo = Math.max(0, Math.min(30, limite - edad));
+    if (plazo > 30) notes.push('El plazo máximo del Infonavit es de 30 años.');
+    if (plazo > maxPlazo) notes.push('Con tu edad, el plazo máximo permitido sería de ' + maxPlazo + ' años (edad + plazo no puede pasar de ' + limite + ').');
+    if (monto > MAX) notes.push('El monto máximo del crédito tradicional es de ' + M(MAX) + '.');
+    if (tasa < 3.69 || tasa > 10.45) notes.push('El Infonavit maneja tasas entre 3.69% y 10.45%. Revisa la tasa de tu precalificación.');
+    var inf = Credito.simular(monto, tasa, plazo * 12, 0), infX = Credito.simular(monto, tasa, plazo * 12, extra);
+    var pb = Math.min(plazo, 20), banco = Credito.simular(monto, tb, pb * 12, 0);
+    var kids = [];
+    notes.forEach(function (n) { kids.push(E('p', { class: 'warn', text: n })); });
+    kids.push(E('div', { class: 'kpi-l', text: 'Mensualidad estimada (capital + interés)' }), E('div', { class: 'big', text: M(inf.cuota) }));
+    if (sal > 0) kids.push(E('p', { class: 'note', text: 'Equivale a ' + PTZ.pct(inf.cuota / sal * 100, 1) + ' de tu salario bruto. Como referencia, el descuento de un crédito suele ubicarse alrededor de 20% a 30% del salario; el Infonavit define el tuyo en la precalificación.' }));
+    var rows = [
+      { k: 'Monto del crédito', v: [M(monto)] }, { k: 'Tasa anual fija', v: [PTZ.pct(tasa, 2)] }, { k: 'Plazo', v: [plazo + ' años'] },
+      { k: 'Intereses totales', v: [M(inf.intereses)] }, { k: 'Total que pagas al Infonavit', v: [M(inf.pagos)], cls: 'tot' }
+    ];
+    if (extra > 0) { rows.push({ k: 'Con abono extra: plazo real', v: [(infX.meses / 12).toFixed(1).replace('.0', '') + ' años'] }); rows.push({ k: 'Con abono extra: intereses que ahorras', v: [M(inf.intereses - infX.intereses)] }); }
+    if (precio > 0) {
+      var falta = precio - monto - ahorro;
+      rows.push({ k: 'Precio de la vivienda', v: [M(precio)] });
+      rows.push({ k: falta > 0 ? 'Te faltaría cubrir' : 'Cubres el precio con margen de', v: [M(Math.abs(falta))] });
+    }
+    kids.push(tbl(rows));
+    kids.push(E('h2', { text: 'Infonavit contra un banco', style: 'margin-top:16px' }));
+    var cmp = [
+      { k: 'Tasa anual', v: [PTZ.pct(tasa, 2), PTZ.pct(tb, 2)] }, { k: 'Plazo', v: [plazo + ' años', pb + ' años'] },
+      { k: 'Mensualidad', v: [M(inf.cuota), M(banco.cuota)] }, { k: 'Intereses totales', v: [M(inf.intereses), M(banco.intereses)] },
+      { k: 'Total pagado', v: [M(inf.pagos), M(banco.pagos)], cls: 'tot' }
+    ];
+    kids.push(tbl(cmp, ['Infonavit', 'Banco']));
+    kids.push(E('p', { class: 'note', text: 'Solo compara el costo del crédito para el mismo monto. No incluye enganche, comisión por apertura, seguros ni gastos de escrituración, que cambian según la institución.' }));
+    var b = E('button', { class: 'btn ghost', type: 'button', text: 'Enviarme mis resultados' });
+    var c = E('button', { class: 'btn ghost', type: 'button', text: 'Descargar CSV' });
+    c.addEventListener('click', function () {
+      var rd = function (n) { return Math.round(n * 100) / 100; };
+      PTZ.downloadCSV('simulacion-infonavit.csv', [['Concepto', 'Infonavit', 'Banco'], ['Monto del crédito', rd(monto), rd(monto)], ['Tasa anual %', tasa, tb], ['Plazo (años)', plazo, pb], ['Mensualidad', rd(inf.cuota), rd(banco.cuota)], ['Intereses totales', rd(inf.intereses), rd(banco.intereses)], ['Total pagado', rd(inf.pagos), rd(banco.pagos)]]);
+    });
+    kids.push(E('div', { class: 'actions' }, [b, c]));
+    kids.forEach(function (k) { host.appendChild(k); });
+    PTZ.mountEmail(b, function () { return last; });
+    last = { title: 'Simulación de crédito Infonavit', lines: [
+      { k: 'Monto del crédito', v: M(monto) }, { k: 'Tasa anual fija', v: PTZ.pct(tasa, 2) }, { k: 'Plazo', v: plazo + ' años' }, { k: 'Mensualidad estimada', v: M(inf.cuota) },
+      { k: 'Intereses totales', v: M(inf.intereses) }, { k: 'Total pagado', v: M(inf.pagos) },
+      { k: 'Comparación con banco (' + PTZ.pct(tb, 2) + ', ' + pb + ' años)', h: true }, { k: 'Mensualidad', v: M(banco.cuota) }, { k: 'Intereses totales', v: M(banco.intereses) }, { k: 'Total pagado', v: M(banco.pagos) }] };
+  }
+  var f = document.getElementById('f-inf'); f.addEventListener('input', render); f.addEventListener('change', render); f.addEventListener('submit', function (e) { e.preventDefault(); });
+  render();
+  PTZ.mountComments(document.getElementById('comments'), 'Infonavit');
+})();
+</script>
+</body>
+</html>

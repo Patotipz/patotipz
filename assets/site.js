@@ -17,6 +17,25 @@
       return e;
     }
   };
+  PTZ.csv = function (rows) {
+    function cell(v) {
+      if (v == null) return '';
+      var t = String(v);
+      if (/^[=+\-@\t\r]/.test(t) && isNaN(Number(t))) t = "'" + t; // evita fórmulas en Excel
+      return /[",\n\r;]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t;
+    }
+    return rows.map(function (r) { return r.map(cell).join(','); }).join('\r\n');
+  };
+  PTZ.downloadCSV = function (name, rows) {
+    var blob = new Blob(['\ufeff' + PTZ.csv(rows)], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  };
+  PTZ.copyText = function (text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    return Promise.reject(new Error('sin portapapeles'));
+  };
   var DISCLAIMER = 'Estimación informativa. No es asesoría financiera, legal ni fiscal. Confirma montos y condiciones con tu empleador, el banco o un profesional.';
 
   /* ---------- Comentarios y preguntas ---------- */
@@ -115,5 +134,11 @@
       d.showModal(); mail.focus();
     });
   };
+  /* Estadísticas de visitas sin cookies (GoatCounter). Se activa poniendo goatcounter: 'tu-codigo' en config.js */
+  if (CFG.goatcounter && /^[a-z0-9-]{2,40}$/i.test(CFG.goatcounter)) {
+    var gc = document.createElement('script'); gc.async = true;
+    gc.setAttribute('data-goatcounter', 'https://' + CFG.goatcounter + '.goatcounter.com/count');
+    gc.src = 'https://gc.zgo.at/count.js'; document.head.appendChild(gc);
+  }
   root.PTZ = PTZ;
 })(window);

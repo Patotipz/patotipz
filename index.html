@@ -32,6 +32,11 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
 .prompter a:hover{color:var(--deep);text-decoration:underline}
 .prompter small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
 @media (prefers-reduced-motion:reduce){.prompter{height:auto;max-height:260px;overflow-y:auto;-webkit-mask-image:none;mask-image:none}.prompter ul[aria-hidden=true]{display:none}}
+.ind-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.ind{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.ind span{display:block;font-size:.78rem;color:var(--muted);font-weight:600}
+.ind b{display:block;font-size:1.3rem;color:var(--deep);font-variant-numeric:tabular-nums;line-height:1.3}
+.ind small{color:var(--muted);font-size:.74rem}
 </style>
 </head>
 <body>
@@ -46,6 +51,7 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
     <a href="tarjetas.html">Tarjetas</a>
     <a href="sueldo.html">Sueldo y finiquito</a>
     <a href="hipoteca.html">Hipoteca</a>
+    <a href="infonavit.html">Infonavit</a>
     <a href="auto.html">Crédito de auto</a>
   </nav>
 </header>
@@ -54,6 +60,12 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
     <h1>Pato<span>tipz</span></h1>
     <p class="lead">Herramientas gratuitas para tomar mejores decisiones con tu dinero. Pruébalas directo en tu navegador, sin registrarte.</p>
   </div>
+
+  <section class="sec" id="ind-sec" aria-labelledby="ind-t" hidden>
+    <h2 id="ind-t">Indicadores</h2>
+    <div class="ind-grid" id="ind-grid"></div>
+    <p class="note" id="ind-note"></p>
+  </section>
 
   <section class="sec" aria-labelledby="news-t">
     <div class="news">
@@ -71,12 +83,13 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
       <a class="tool" href="tarjetas.html"><h3>Encuentra tu tarjeta de crédito</h3><p>Compara más de 100 tarjetas de México según tu perfil: CAT, anualidad, beneficios y promociones.</p><span class="tag">Tarjetas</span></a>
       <a class="tool" href="sueldo.html"><h3>Sueldo neto, aguinaldo y finiquito</h3><p>Cuánto te queda después de ISR e IMSS, y cuánto te corresponde si dejas un trabajo. Tablas 2026.</p><span class="tag">Trabajo</span></a>
       <a class="tool" href="hipoteca.html"><h3>Comparador de hipotecas</h3><p>Pon tus cotizaciones lado a lado y descubre cuál cuesta menos en total, con CAT estimado.</p><span class="tag">Vivienda</span></a>
+      <a class="tool" href="infonavit.html"><h3>Simulador de crédito Infonavit</h3><p>Mensualidad, plazo según tu edad y comparación contra un crédito bancario.</p><span class="tag">Vivienda</span></a>
       <a class="tool" href="auto.html"><h3>Comparador de crédito de auto</h3><p>Agencia o banco: compara mensualidad, intereses, seguro y costo total real.</p><span class="tag">Auto</span></a>
     </div>
   </section>
 </main>
 <div id="comments"></div>
-<footer class="site-f"><p>Información general, no es asesoría financiera, legal ni fiscal, ni una oferta de crédito. Confirma siempre las condiciones con la institución o un profesional. Los titulares son enlaces a medios externos.</p></footer>
+<footer class="site-f"><p>Información general, no es asesoría financiera, legal ni fiscal, ni una oferta de crédito. Confirma siempre las condiciones con la institución o un profesional. Los titulares son enlaces a medios externos. <a href="privacidad.html">Aviso de privacidad</a></p></footer>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
 <script>
@@ -120,6 +133,24 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
   box.addEventListener('focusin', function () { var s = box.querySelector('.scroller'); if (s) s.style.animationPlayState = 'paused'; });
   box.addEventListener('focusout', function () { var s = box.querySelector('.scroller'); if (s && !box.classList.contains('paused')) s.style.animationPlayState = 'running'; });
   PTZ.mountComments(document.getElementById('comments'), 'Inicio');
+})();
+</script>
+<script>
+(function () {
+  var sec = document.getElementById('ind-sec'), grid = document.getElementById('ind-grid'), note = document.getElementById('ind-note');
+  function fmt(it) {
+    var n = new Intl.NumberFormat('es-MX', { minimumFractionDigits: it.decimals, maximumFractionDigits: it.decimals }).format(it.value);
+    return it.kind === 'mxn' ? '$' + n : n + '%';
+  }
+  function day(iso) { var d = new Date(iso + 'T12:00:00'); return isNaN(d) ? '' : d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' }); }
+  fetch('data/indicators.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+    var items = (d && d.items) || []; if (!items.length) return;
+    items.forEach(function (it) {
+      grid.appendChild(PTZ.el('div', { class: 'ind' }, [PTZ.el('span', { text: it.label }), PTZ.el('b', { text: fmt(it) }), PTZ.el('small', { text: day(it.date) })]));
+    });
+    note.textContent = 'Fuente: ' + (d.source || 'Banco de México') + '. Cada dato muestra la fecha de su última publicación.';
+    sec.hidden = false;
+  }).catch(function () {});
 })();
 </script>
 </body>

@@ -10,9 +10,12 @@
 </head>
 <body>
 <header class="site-h">
-  <a class="brand" href="index.html">Pato<span>tipz</span></a>
+  <a class="brand" href="index.html">
+    <img src="assets/duck.png" alt="PatoTipz Logo" class="brand-logo">
+    <span>Pato<span>tipz</span></span>
+  </a>
   <nav aria-label="Principal">
-    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="auto.html" aria-current="page">Crédito de auto</a>
+    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html" aria-current="page">Crédito de auto</a>
   </nav>
 </header>
 <main>
@@ -35,7 +38,7 @@
   </details>
 </main>
 <div id="comments"></div>
-<footer class="site-f"><p>Información general, no es asesoría financiera ni una oferta de crédito. Las condiciones finales las define cada institución.</p></footer>
+<footer class="site-f"><p>Información general, no es asesoría financiera ni una oferta de crédito. Las condiciones finales las define cada institución. <a href="privacidad.html">Aviso de privacidad</a></p></footer>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
 <script src="assets/credito.js"></script>
@@ -45,7 +48,7 @@ PTZComp.init({
   rootId: 'app', prefix: 'a', sharedTitle: 'Tu compra', precioLabel: 'Precio del auto ($)', precioDef: 350000,
   gastosLabel: 'Otros gastos iniciales (%)', gastosDef: 0, gastosHint: 'Placas, tenencia, accesorios u otros, como % del precio.',
   plazoUnit: 'meses', plazos: [12, 24, 36, 48, 60, 72], seguroLabel: 'Seguro del auto (anual, $)', seguroHint: 'El crédito exige seguro vigente. Aquí se reparte en 12 pagos.', seguroAnual: true,
-  emailTitle: 'Comparación de créditos de auto',
+  emailTitle: 'Comparación de créditos de auto', csvName: 'comparacion-credito-auto.csv',
   offers: [
     { nombre: 'Agencia', eng: 20, tasa: 14, plazo: 48, com: 2, seg: 12000 },
     { nombre: 'Banco', eng: 25, tasa: 12.5, plazo: 48, com: 3, seg: 12000 },

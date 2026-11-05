@@ -1,10 +1,9 @@
-/* Configuración del sitio. Edita SOLO este archivo para activar comentarios y envío de resultados por correo.
-   Guía paso a paso: LEEME.txt */
+/* Configuración del sitio. Edita SOLO este archivo para activar comentarios, correo y estadísticas. */
 window.PTZ_CONFIG = {
-  // Comentarios y preguntas (Web3Forms, gratis): pega aquí tu "Access Key" de https://web3forms.com
+  // Comentarios y preguntas (Web3Forms)
   web3formsKey: '78cc436b-236b-42af-add9-6f1c4139b99a',
-  // Envío de resultados al correo del visitante (EmailJS, gratis hasta 200 correos al mes)
-  emailjs: { serviceId: 'service_sbxylsm', templateId: 'template_90zsifc', publicKey: 'JRawHEB707fe49Mav' }
-   data-goatcounter="https://patotipz.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js",
+  // Envío de resultados al correo del visitante (EmailJS)
+  emailjs: { serviceId: 'service_sbxylsm', templateId: 'template_90zsifc', publicKey: 'JRawHEB707fe49Mav' },
+  // Contador de visitas (GoatCounter): solo el código, no el script completo
+  goatcounter: 'patotipz'
 };

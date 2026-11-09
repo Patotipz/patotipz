@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T20:23:41.380512+00:00",
+ "updated": "2026-11-09T20:28:30.958327+00:00",
  "source": "Banco de México (SIE)",
  "items": [
   {
@@ -7,8 +7,8 @@
    "label": "Dólar (FIX)",
    "kind": "mxn",
    "decimals": 4,
-   "value": 18.6297,
-   "date": "2026-11-06",
+   "value": 18.5983,
+   "date": "2026-11-09",
    "title": "Tipo de cambio                                          Pesos por dólar E.U.A. Tipo de cambio para solventar obligaciones denominadas en moneda extranjera Fecha de determinación (FIX)"
   },
   {
@@ -17,7 +17,7 @@
    "kind": "pct",
    "decimals": 4,
    "value": 6.5147,
-   "date": "2026-11-09",
+   "date": "2026-11-10",
    "title": "TIIE a 28 días Tasa de interés en por ciento anual"
   },
   {
@@ -34,8 +34,8 @@
    "label": "UDI",
    "kind": "mxn",
    "decimals": 6,
-   "value": 8.897671,
-   "date": "2026-11-10",
+   "value": 8.932476,
+   "date": "2026-11-25",
    "title": "Valor de UDIS"
   },
   {
@@ -43,8 +43,8 @@
    "label": "Inflación anual",
    "kind": "pct",
    "decimals": 2,
-   "value": 3.45,
-   "date": "2026-09-01",
+   "value": 3.75,
+   "date": "2026-10-01",
    "title": "Índice Nacional de Precios al consumidor variación anual"
   }
  ]

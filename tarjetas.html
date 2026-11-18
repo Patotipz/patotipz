@@ -15,7 +15,7 @@
     <span>Pato<span>tipz</span></span>
   </a>
   <nav aria-label="Principal">
-    <a href="index.html">Inicio</a><a href="tarjetas.html" aria-current="page">Tarjetas</a><a href="sueldo.html" href="page">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a>
+    <a href="index.html">Inicio</a><a href="tarjetas.html" aria-current="page">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a>
   </nav>
 </header>
   <style>
@@ -84,40 +84,8 @@
   }
 }
 
-/* MANUAL DARK MODE */
-:root[data-theme="dark"] {
-  --bg: #000F08;
-  --surface: #1C3738;
-  --card: #1C3738;
-
-  --ink: #F4FFF8;
-  --muted: #8BAAAD;
-  --line: #4D4847;
-
-  --deep: #8BAAAD;
-  --green: #8BAAAD;
-
-  --bar: #4D4847;
-  --bar-top: #8BAAAD;
-
-  --chip: #1C3738;
-  --focus: #F4FFF8;
-
-  --warn: #FFD08A;
-  --warn-bg: #332714;
-
-  --on-deep: #000F08;
-
-  color-scheme: dark;
-}
-
-/* MANUAL LIGHT MODE */
-:root[data-theme="light"] {
-  color-scheme: light;
-}
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Aptos,"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;line-height:1.45}
-main{max-width:1120px;margin:0 auto;padding:26px 20px 60px}
 h1{font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 6px;letter-spacing:-.01em}
 h2{font-size:1.02rem;margin:0 0 10px}
 .lead{color:var(--muted);margin:0 0 18px;max-width:64ch}
@@ -190,7 +158,6 @@ td.nm input{min-width:150px}td.nt input{min-width:230px}
 .tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 textarea{min-height:130px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.76rem}
 .legal{margin-top:26px;color:var(--muted);font-size:.8rem;max-width:84ch}
-.theme{position:absolute;right:14px;top:calc(10px + env(safe-area-inset-top,0px));font:inherit;font-size:.8rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:4px 10px;cursor:pointer}
 
 .metarow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:-6px 0 18px;color:var(--muted);font-size:.86rem}
 .chg{border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:8px;background:var(--card)}
@@ -255,7 +222,6 @@ dialog[open]{display:flex;flex-direction:column}
 <link rel="stylesheet" href="assets/widgets.css">
 </head>
 <body>
-<button class="theme" id="theme" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
 <main>
 <h1>Encuentra tu tarjeta de crédito</h1>
 <p class="lead">Responde unas preguntas sobre tu situación y la herramienta ordena más de 100 tarjetas de bancos y fintechs (el comparativo oficial de Banxico y CONDUSEF de junio de 2026 más fichas completas) según lo que más te importa, incluidos los beneficios que realmente usarías.</p>
@@ -750,7 +716,6 @@ $('csvBtn').addEventListener('click',()=>{
 });
 $('promoBtn').addEventListener('click',openPromos); $('promoClose').addEventListener('click',()=>$('promoDlg').close&&$('promoDlg').close()); $('promoMine').addEventListener('change',renderPromos);
 $('q').addEventListener('input',()=>{ SHOW=20; render(); }); $('onlyFull').addEventListener('change',()=>{ SHOW=20; render(); }); $('more').addEventListener('click',()=>{ SHOW+=30; render(); });
-$('theme').addEventListener('click',()=>{ const cur=document.documentElement.getAttribute('data-theme'); const dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.setAttribute('data-theme',dark?'light':'dark'); });
 </script>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>

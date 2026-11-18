@@ -13,6 +13,7 @@
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/widgets.css">
+<link rel="stylesheet" href="assets/nav.css">
 <style>
 .hero{padding:10px 0 6px}
 .hero h1{font-size:clamp(2.1rem,6vw,3.2rem)}
@@ -53,12 +54,7 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
   </a>
 
   <nav aria-label="Principal">
-    <a href="index.html" aria-current="page">Inicio</a>
-    <a href="tarjetas.html">Tarjetas</a>
-    <a href="sueldo.html">Sueldo y finiquito</a>
-    <a href="hipoteca.html">Hipoteca</a>
-    <a href="infonavit.html">Infonavit</a>
-    <a href="auto.html">Crédito de auto</a><a href="cetes.html">CETES</a>
+    <a href="index.html" aria-current="page">Inicio</a><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html">Simulador de inversión</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
   </nav>
 </header>
 <main>
@@ -91,6 +87,7 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
       <a class="tool" href="hipoteca.html"><h3>Comparador de hipotecas</h3><p>Pon tus cotizaciones lado a lado y descubre cuál cuesta menos en total, con CAT estimado.</p><span class="tag">Vivienda</span></a>
       <a class="tool" href="infonavit.html"><h3>Simulador de crédito Infonavit</h3><p>Mensualidad, plazo según tu edad y comparación contra un crédito bancario.</p><span class="tag">Vivienda</span></a>
       <a class="tool" href="cetes.html"><h3>Calculadora de CETES</h3><p>Cuánto ganas a 28, 91, 182 o 364 días, ya con retención de ISR y comparado contra la inflación.</p><span class="tag">Inversión</span></a>
+      <a class="tool" href="inversion.html"><h3>Simulador de inversión y ahorro</h3><p>Compara hasta 3 opciones con aportaciones mensuales, ISR e inflación, y calcula cuánto ahorrar para tu meta.</p><span class="tag">Inversión</span></a>
       <a class="tool" href="auto.html"><h3>Comparador de crédito de auto</h3><p>Agencia o banco: compara mensualidad, intereses, seguro y costo total real.</p><span class="tag">Auto</span></a>
     </div>
   </section>
@@ -165,5 +162,6 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
   }).catch(function () {});
 })();
 </script>
+<script src="assets/nav.js"></script>
 </body>
 </html>

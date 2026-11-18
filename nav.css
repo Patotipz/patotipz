@@ -1,0 +1,25 @@
+/* Menú con submenús. Usa las variables de color de site.css. */
+.site-h nav { align-items: center; }
+.site-h nav .grp { position: relative; }
+.site-h nav .grp > button {
+  font: inherit; color: var(--muted); background: none; border: 0; cursor: pointer;
+  padding: 4px 0; display: inline-flex; align-items: center; gap: 4px;
+}
+.site-h nav .grp > button::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg) translateY(-2px); }
+.site-h nav .grp > button:hover, .site-h nav .grp.cur > button, .site-h nav .grp.open > button { color: var(--deep); }
+.site-h nav .grp.cur > button { text-decoration: underline; text-underline-offset: 4px; }
+.site-h nav .sub {
+  display: none; position: absolute; top: 100%; left: -12px; z-index: 20; min-width: 210px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px; margin-top: 4px;
+  box-shadow: 0 8px 24px rgba(0, 15, 8, .18);
+}
+.site-h nav .grp.open .sub, .site-h nav .grp:hover .sub, .site-h nav .grp:focus-within .sub { display: block; }
+.site-h nav .sub a { display: block; padding: 9px 12px; border-radius: 6px; white-space: nowrap; }
+.site-h nav .sub a:hover { background: var(--surface); text-decoration: none; }
+.site-h nav .sub a[aria-current="page"] { color: var(--deep); font-weight: 700; text-decoration: none; }
+@media (max-width: 640px) {
+  .site-h nav { width: 100%; gap: 2px 16px; }
+  .site-h nav .grp:hover .sub { display: none; }           /* en celular solo abre con toque */
+  .site-h nav .grp.open .sub { display: block; }
+  .site-h nav .sub { min-width: 190px; }
+}

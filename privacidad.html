@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" href="assets/duck.png">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/widgets.css">
+<link rel="stylesheet" href="assets/nav.css">
 </head>
 <body>
 <header class="site-h">
@@ -16,7 +17,7 @@
     <span>Pato<span>tipz</span></span>
   </a>
   <nav aria-label="Principal">
-    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a><a href="cetes.html">CETES</a>
+    <a href="index.html">Inicio</a><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html">Simulador de inversión</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
   </nav>
 </header>
 <main>
@@ -63,5 +64,6 @@
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
 <script>PTZ.mountComments(document.getElementById('comments'), 'Aviso de privacidad');</script>
+<script src="assets/nav.js"></script>
 </body>
 </html>

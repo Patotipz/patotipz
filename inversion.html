@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador de inversión y ahorro: cuánto tendrás | Patotipz</title>
+<meta name="description" content="Proyecta tu ahorro con aportaciones mensuales, compara hasta 3 opciones de inversión y calcula cuánto necesitas ahorrar para llegar a tu meta, descontando ISR e inflación.">
+<link rel="icon" type="image/png" href="assets/duck.png">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">
+    <img src="assets/duck.png" alt="PatoTipz Logo" class="brand-logo">
+    <span>Pato<span>tipz</span></span>
+  </a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp cur"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html" aria-current="page">Simulador de inversión</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
+  </nav>
+</header>
+<main>
+  <h1>Simulador de inversión y ahorro</h1>
+  <p class="lead">Compara hasta tres opciones con tus aportaciones mensuales y mira cuánto tendrás al final, antes y después de inflación. Las tasas son tuyas: pon la que te ofrezca cada institución.</p>
+
+  <form id="f" novalidate>
+  <section class="grid2">
+    <div class="card">
+      <h2>Tu ahorro</h2>
+      <div class="row2">
+        <div class="field"><label for="ini">Monto inicial</label><input id="ini" type="number" inputmode="decimal" min="0" step="100" value="10000"></div>
+        <div class="field"><label for="men">Aportación mensual</label><input id="men" type="number" inputmode="decimal" min="0" step="100" value="2000"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="anios">Años</label><input id="anios" type="number" inputmode="decimal" min="1" max="40" step="1" value="10"></div>
+        <div class="field"><label for="inf">Inflación anual (%)</label><input id="inf" type="number" inputmode="decimal" min="-5" max="50" step="0.01" value="4"><small id="inf-src">Supuesto promedio a largo plazo; editable.</small></div>
+      </div>
+      <label class="ptz-chk"><input id="ret" type="checkbox" checked> <span>Descontar retención de ISR de 0.90% anual sobre el capital (2026)</span></label>
+    </div>
+    <div class="card">
+      <h2>Opciones a comparar</h2>
+      <div class="row2"><div class="field"><label for="na">Opción A</label><input id="na" type="text" maxlength="30" value="CETES 28 días"></div><div class="field"><label for="ta">Tasa anual bruta (%)</label><input id="ta" type="number" inputmode="decimal" min="0" max="60" step="0.01" value="6.19"></div></div>
+      <div class="row2"><div class="field"><label for="nb">Opción B</label><input id="nb" type="text" maxlength="30" value="CETES 364 días"></div><div class="field"><label for="tb">Tasa anual bruta (%)</label><input id="tb" type="number" inputmode="decimal" min="0" max="60" step="0.01" value="6.95"></div></div>
+      <div class="row2"><div class="field"><label for="nc">Opción C</label><input id="nc" type="text" maxlength="30" value="Tu opción"></div><div class="field"><label for="tc">Tasa anual bruta (%)</label><input id="tc" type="number" inputmode="decimal" min="0" max="60" step="0.01" value="4.50"></div></div>
+      <p class="note" id="rate-src">Las tasas de CETES se cargan de la última subasta de Banxico cuando están disponibles.</p>
+    </div>
+  </section>
+  </form>
+
+  <section class="card soft" style="margin-top:18px" aria-live="polite" id="out"></section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>¿Cuánto debo ahorrar para mi meta?</h2>
+    <form id="fm" novalidate>
+      <div class="row2">
+        <div class="field"><label for="meta">Meta (monto)</label><input id="meta" type="number" inputmode="decimal" min="0" step="1000" value="500000"></div>
+        <div class="field"><label for="mp">Meta a los años indicados arriba, con la opción</label><select id="mp"><option value="a">A</option><option value="b">B</option><option value="c">C</option></select></div>
+      </div>
+    </form>
+    <div id="meta-out" aria-live="polite"></div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>Cómo se calcula</h2>
+    <ul>
+      <li>Capitalización mensual: cada mes el saldo gana tasa ÷ 12, se descuenta la retención de ISR (0.90% ÷ 12 sobre el saldo) y se suma tu aportación al final del mes.</li>
+      <li>La retención es un pago provisional; en tu declaración anual se ajusta a tu situación. Las tasas reales cambian con el tiempo y no están garantizadas.</li>
+      <li>"Valor real" divide el saldo final entre la inflación acumulada: es lo que tu dinero compraría en pesos de hoy.</li>
+      <li>Las opciones con riesgo de mercado (fondos, acciones, ETFs) no tienen una tasa fija: aquí solo puedes simular un escenario que tú supongas.</li>
+    </ul>
+  </section>
+</main>
+<div id="comments"></div>
+<footer class="site-f"><p>Estimación informativa; las tasas futuras no están garantizadas. No es asesoría financiera, legal ni fiscal. Confirma montos y condiciones con la institución o un profesional.</p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/inversion.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, M = PTZ.money0, E = PTZ.el;
+  function num(id) { var v = parseFloat($(id).value); return isFinite(v) ? v : NaN; }
+  function opts() { return [['a', 'na', 'ta'], ['b', 'nb', 'tb'], ['c', 'nc', 'tc']].map(function (x) { return { k: x[0], name: $(x[1]).value.trim() || 'Opción ' + x[0].toUpperCase(), tasa: num(x[2]) }; }); }
+  function shared() { return { inicial: num('ini'), mensual: num('men'), anios: num('anios'), inf: num('inf'), ret: $('ret').checked }; }
+  function td(t, cls) { return E('td', { class: cls || 'n', text: t }); }
+  var last = null;
+  function render() {
+    var out = $('out'); out.textContent = '';
+    var s = shared(), os = opts();
+    var bad = !(s.inicial >= 0) || !(s.mensual >= 0) || !(s.anios >= 1 && s.anios <= 40) || os.some(function (o) { return !(o.tasa >= 0); });
+    if (bad) { out.appendChild(E('p', { text: 'Revisa los datos: montos y tasas válidos, y de 1 a 40 años.' })); $('meta-out').textContent = ''; last = null; return; }
+    var res = os.map(function (o) { return Inversion.proyectar({ inicial: s.inicial, mensual: s.mensual, anios: s.anios, tasa: o.tasa, retencion: s.ret, inflacion: isFinite(s.inf) ? s.inf : null }); });
+    last = { s: s, os: os, res: res };
+    out.appendChild(E('h2', { text: 'Resultado a ' + s.anios + (s.anios === 1 ? ' año' : ' años') }));
+    var head = E('tr', {}, [E('th', { text: '' })].concat(os.map(function (o) { return E('th', { text: o.name + ' (' + PTZ.pct(o.tasa) + ')' }); })));
+    var rows = [['Total que aportas', 'aportado'], ['Saldo final', 'final'], ['Ganancia', 'ganancia'], ['Valor real (pesos de hoy)', 'real']];
+    var tb = E('tbody');
+    rows.forEach(function (r) {
+      if (res[0][r[1]] == null) return;
+      var tr = E('tr', { class: r[1] === 'final' ? 'tot' : '' }, [E('th', { scope: 'row', text: r[0], style: 'font-weight:' + (r[1] === 'final' ? '800' : '400') })]);
+      res.forEach(function (x) { tr.appendChild(td(M(x[r[1]]))); }); tb.appendChild(tr);
+    });
+    out.appendChild(E('div', { style: 'overflow-x:auto' }, [E('table', { class: 't' }, [E('thead', {}, [head]), tb])]));
+    // evolución por año
+    var det = E('details', { style: 'margin-top:12px' }, [E('summary', { text: 'Ver evolución año por año' })]);
+    var h2 = E('tr', {}, [E('th', { text: 'Año' })].concat(os.map(function (o) { return E('th', { text: o.name }); })));
+    var b2 = E('tbody');
+    res[0].serie.forEach(function (p, i) {
+      var tr = E('tr', {}, [E('th', { scope: 'row', text: (p.mes % 12 === 0 ? p.mes / 12 : (p.mes / 12).toFixed(1)) + '', style: 'font-weight:400' })]);
+      res.forEach(function (x) { tr.appendChild(td(M(x.serie[i].saldo))); }); b2.appendChild(tr);
+    });
+    det.appendChild(E('div', { style: 'overflow-x:auto' }, [E('table', { class: 't' }, [E('thead', {}, [h2]), b2])]));
+    out.appendChild(det);
+    var b = E('button', { class: 'btn ghost', type: 'button', text: 'Enviarme mis resultados' });
+    out.appendChild(E('div', { class: 'actions' }, [b]));
+    PTZ.mountEmail(b, function () {
+      var l = [{ k: 'Monto inicial', v: M(s.inicial) }, { k: 'Aportación mensual', v: M(s.mensual) }, { k: 'Años', v: String(s.anios) }, { k: 'Inflación supuesta', v: PTZ.pct(s.inf) }];
+      os.forEach(function (o, i) { l.push({ k: o.name + ' (' + PTZ.pct(o.tasa) + ')', h: true }); l.push({ k: 'Saldo final', v: M(res[i].final) }); l.push({ k: 'Ganancia', v: M(res[i].ganancia) }); if (res[i].real != null) l.push({ k: 'Valor real', v: M(res[i].real) }); });
+      return { title: 'Mi simulación de inversión', lines: l };
+    });
+    meta();
+  }
+  function meta() {
+    var box = $('meta-out'); box.textContent = ''; if (!last) return;
+    var meta = num('meta'), i = ['a', 'b', 'c'].indexOf($('mp').value), o = last.os[i];
+    if (!(meta > 0)) return;
+    var need = Inversion.aporteParaMeta({ inicial: last.s.inicial, anios: last.s.anios, tasa: o.tasa, meta: meta, retencion: last.s.ret });
+    box.appendChild(E('p', { text: need === 0 ? 'Con tu monto inicial ya llegas a ' + M(meta) + ' sin aportar más, a ' + PTZ.pct(o.tasa) + '.' : 'Para tener ' + M(meta) + ' en ' + last.s.anios + ' años con "' + o.name + '" necesitas aportar aproximadamente ' + M(need) + ' al mes.' }));
+    if (last.s.inf > 0) box.appendChild(E('p', { class: 'note', text: 'Ojo: esa meta es en pesos futuros. Con ' + PTZ.pct(last.s.inf, 1) + ' de inflación, ' + M(meta) + ' dentro de ' + last.s.anios + ' años equivalen a ' + M(meta / Math.pow(1 + last.s.inf / 100, last.s.anios)) + ' de hoy.' }));
+  }
+  document.getElementById('f').addEventListener('input', render);
+  document.getElementById('f').addEventListener('submit', function (e) { e.preventDefault(); });
+  document.getElementById('fm').addEventListener('input', meta);
+  document.getElementById('fm').addEventListener('submit', function (e) { e.preventDefault(); });
+  render();
+  fetch('data/indicators.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+    (j.items || []).forEach(function (it) { if (it.id === 'SP30578' && isFinite(it.value)) { $('inf').value = it.value; $('inf-src').textContent = 'Inflación anual más reciente (' + it.date.slice(0, 7) + '), editable.'; } });
+    var by = {}; (j.cetes || []).forEach(function (c) { if (isFinite(c.value) && /cetes/i.test(c.title || '') && new RegExp('\\b' + c.dias + '\\b').test(c.title || '')) by[c.dias] = c; });
+    if (by[28]) $('ta').value = by[28].value; if (by[364]) $('tb').value = by[364].value;
+    if (by[28] || by[364]) $('rate-src').textContent = 'Tasas de CETES de la última subasta de Banxico (' + (by[28] || by[364]).date + '); puedes editarlas.';
+    render();
+  }).catch(function () {});
+  PTZ.mountComments($('comments'), 'Inversión');
+})();
+</script>
+<script src="assets/nav.js"></script>
+</body>
+</html>

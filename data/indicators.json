@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T20:31:10.349205+00:00",
+ "updated": "2026-11-18T22:02:16.083908+00:00",
  "source": "Banco de México (SIE)",
  "items": [
   {
@@ -46,6 +46,36 @@
    "value": 3.75,
    "date": "2026-10-01",
    "title": "Índice Nacional de Precios al consumidor variación anual"
+  }
+ ],
+ "cetes": [
+  {
+   "id": "SF43936",
+   "dias": 28,
+   "value": 6.19,
+   "date": "2026-11-19",
+   "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 28 días"
+  },
+  {
+   "id": "SF43939",
+   "dias": 91,
+   "value": 6.49,
+   "date": "2026-11-19",
+   "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 91 días"
+  },
+  {
+   "id": "SF43942",
+   "dias": 182,
+   "value": 6.67,
+   "date": "2026-11-19",
+   "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 182 días"
+  },
+  {
+   "id": "SF43945",
+   "dias": 364,
+   "value": 6.95,
+   "date": "2026-11-12",
+   "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 364 días"
   }
  ]
 }

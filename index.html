@@ -4,7 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Patotipz</title>
-<meta name="description" content="Herramientas gratuitas de finanzas personales para México: tarjetas de crédito, sueldo neto, finiquito, hipoteca y crédito de auto.">
+<meta name="description" content="Herramientas gratuitas de finanzas personales para México: tarjetas de crédito, sueldo neto, finiquito, hipoteca crédito de auto y CETES.">
+<link rel="icon" type="image/png" href="assets/duck.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Patotipz: herramientas de finanzas personales para México">
+<meta property="og:description" content="Tarjetas, sueldo neto, finiquito, hipoteca, Infonavit, crédito de auto y CETES. Gratis y sin registro.">
+<meta property="og:image" content="https://patotipz.github.io/patotipz/assets/duck.png">
+<meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/widgets.css">
 <style>
@@ -52,7 +58,7 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
     <a href="sueldo.html">Sueldo y finiquito</a>
     <a href="hipoteca.html">Hipoteca</a>
     <a href="infonavit.html">Infonavit</a>
-    <a href="auto.html">Crédito de auto</a>
+    <a href="auto.html">Crédito de auto</a><a href="cetes.html">CETES</a>
   </nav>
 </header>
 <main>
@@ -84,6 +90,7 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
       <a class="tool" href="sueldo.html"><h3>Sueldo neto, aguinaldo y finiquito</h3><p>Cuánto te queda después de ISR e IMSS, y cuánto te corresponde si dejas un trabajo. Tablas 2026.</p><span class="tag">Trabajo</span></a>
       <a class="tool" href="hipoteca.html"><h3>Comparador de hipotecas</h3><p>Pon tus cotizaciones lado a lado y descubre cuál cuesta menos en total, con CAT estimado.</p><span class="tag">Vivienda</span></a>
       <a class="tool" href="infonavit.html"><h3>Simulador de crédito Infonavit</h3><p>Mensualidad, plazo según tu edad y comparación contra un crédito bancario.</p><span class="tag">Vivienda</span></a>
+      <a class="tool" href="cetes.html"><h3>Calculadora de CETES</h3><p>Cuánto ganas a 28, 91, 182 o 364 días, ya con retención de ISR y comparado contra la inflación.</p><span class="tag">Inversión</span></a>
       <a class="tool" href="auto.html"><h3>Comparador de crédito de auto</h3><p>Agencia o banco: compara mensualidad, intereses, seguro y costo total real.</p><span class="tag">Auto</span></a>
     </div>
   </section>
@@ -142,11 +149,16 @@ a.tool p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
     var n = new Intl.NumberFormat('es-MX', { minimumFractionDigits: it.decimals, maximumFractionDigits: it.decimals }).format(it.value);
     return it.kind === 'mxn' ? '$' + n : n + '%';
   }
-  function day(iso) { var d = new Date(iso + 'T12:00:00'); return isNaN(d) ? '' : d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' }); }
+  function day(iso, it) {
+    var d = new Date(iso + 'T12:00:00'); if (isNaN(d)) return '';
+    if (it && (it.id === 'SF282' || it.id === 'SP30578')) return d.toLocaleDateString('es-MX', { month: 'short', year: 'numeric' }).replace('.', '') + ' (dato mensual)';
+    var txt = d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+    return d > new Date() ? 'vigente al ' + txt : txt;
+  }
   fetch('data/indicators.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
     var items = (d && d.items) || []; if (!items.length) return;
     items.forEach(function (it) {
-      grid.appendChild(PTZ.el('div', { class: 'ind' }, [PTZ.el('span', { text: it.label }), PTZ.el('b', { text: fmt(it) }), PTZ.el('small', { text: day(it.date) })]));
+      grid.appendChild(PTZ.el('div', { class: 'ind' }, [PTZ.el('span', { text: it.label }), PTZ.el('b', { text: fmt(it) }), PTZ.el('small', { text: day(it.date, it) })]));
     });
     note.textContent = 'Fuente: ' + (d.source || 'Banco de México') + '. Cada dato muestra la fecha de su última publicación.';
     sec.hidden = false;

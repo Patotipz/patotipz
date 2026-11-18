@@ -16,6 +16,10 @@ SERIES = [
     ("SP30578", "Inflación anual", "pct", 2),
 ]
 
+# Tasas de la subasta primaria semanal de CETES (por plazo en días). IDs por verificar: la página
+# solo las usa si el título que devuelve Banxico menciona "Cetes" y el plazo correcto.
+SUBASTAS = [("SF43936", 28), ("SF43939", 91), ("SF43942", 182), ("SF43945", 364)]
+
 
 def parse(payload):
     """Devuelve {id: (titulo, fecha_iso, valor)} ignorando datos no disponibles (N/E)."""
@@ -56,11 +60,24 @@ def main():
             items.append({"id": sid, "label": label, "kind": kind, "decimals": dec, "value": valor, "date": fecha, "title": titulo})
         else:
             print(f"{sid}: sin dato", file=sys.stderr)
+    cetes = []
+    try:
+        req2 = urllib.request.Request(URL.format(ids=",".join(x[0] for x in SUBASTAS)), headers={
+            "Bmx-Token": token, "Accept": "application/json", "User-Agent": "PatotipzIndicatorsBot/1.0"})
+        with urllib.request.urlopen(req2, timeout=30) as r:
+            g2 = parse(json.load(r))
+        for sid, dias in SUBASTAS:
+            if sid in g2:
+                titulo, fecha, valor = g2[sid]
+                print(f"SUBASTA {sid} ({dias} d): {titulo} = {valor} ({fecha})")
+                cetes.append({"id": sid, "dias": dias, "value": valor, "date": fecha, "title": titulo})
+    except Exception as e:
+        print(f"aviso: subastas de CETES no disponibles: {e}", file=sys.stderr)
     if not items:
         print("Banxico no devolvió datos; se conserva el archivo anterior.", file=sys.stderr)
         return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps({"updated": datetime.now(timezone.utc).isoformat(), "source": "Banco de México (SIE)", "items": items},
+    OUT.write_text(json.dumps({"updated": datetime.now(timezone.utc).isoformat(), "source": "Banco de México (SIE)", "items": items, "cetes": cetes},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(items)} indicadores guardados.")
     return 0

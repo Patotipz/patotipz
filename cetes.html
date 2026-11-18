@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de CETES: rendimiento neto 2026 | Patotipz</title>
+<meta name="description" content="Calcula cuánto ganas invirtiendo en CETES a 28, 91, 182 o 364 días: interés bruto, retención de ISR, rendimiento neto y ganancia real contra la inflación.">
+<link rel="icon" type="image/png" href="assets/duck.png">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">
+    <img src="assets/duck.png" alt="PatoTipz Logo" class="brand-logo">
+    <span>Pato<span>tipz</span></span>
+  </a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><a href="tarjetas.html">Tarjetas</a><a href="sueldo.html">Sueldo y finiquito</a><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a><a href="cetes.html" aria-current="page">CETES</a>
+  </nav>
+</header>
+<main>
+  <h1>Calculadora de CETES</h1>
+  <p class="lead">Cuánto te queda realmente después de impuestos y qué tanto le ganas a la inflación. Los resultados se actualizan mientras escribes.</p>
+
+  <section class="grid2">
+    <form class="card" id="f" novalidate>
+      <h2>Tu inversión</h2>
+      <div class="row2">
+        <div class="field"><label for="monto">Monto a invertir</label><input id="monto" type="number" inputmode="decimal" min="100" step="100" value="10000"><small>Mínimo $100 en CETESDirecto.</small></div>
+        <div class="field"><label for="dias">Plazo</label><select id="dias"><option value="28">28 días</option><option value="91">91 días</option><option value="182">182 días</option><option value="364">364 días</option></select></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="tasa">Tasa anual bruta (%)</label><input id="tasa" type="number" inputmode="decimal" min="0" max="50" step="0.01" value="6.16"><small id="tasa-src">Escribe la tasa de la última subasta.</small></div>
+        <div class="field"><label for="inf">Inflación anual (%)</label><input id="inf" type="number" inputmode="decimal" min="-5" max="50" step="0.01" value="3.75"><small id="inf-src">Para calcular tu ganancia real.</small></div>
+      </div>
+      <div class="field"><label for="anios">Si reinviertes cada vencimiento, ¿por cuántos años?</label><input id="anios" type="number" inputmode="decimal" min="0.5" max="30" step="0.5" value="2"></div>
+    </form>
+    <div class="card soft" aria-live="polite" id="out"></div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>Cómo se calcula</h2>
+    <ul>
+      <li><strong>Interés bruto</strong> = monto × tasa × días ÷ 360. Los CETES se cotizan a descuento sobre 360 días.</li>
+      <li><strong>Retención de ISR</strong>: 0.90% anual sobre el capital en 2026 (Ley de Ingresos de la Federación 2026, art. 24). Es un pago provisional: en tu declaración anual se ajusta a tu situación.</li>
+      <li><strong>Rendimiento real</strong> = rendimiento neto anualizado frente a la inflación anual que captures.</li>
+      <li>La tasa que obtienes es la de la subasta en la que participas; puede cambiar cada semana. Consulta la vigente en <a href="https://www.cetesdirecto.com" target="_blank" rel="noopener noreferrer">CETESDirecto</a> o en <a href="https://www.banxico.org.mx" target="_blank" rel="noopener noreferrer">Banxico</a>.</li>
+    </ul>
+    <p class="note">Los CETES son deuda del Gobierno Federal; el rendimiento pasado no garantiza el futuro. Si los vendes antes del vencimiento el precio puede variar.</p>
+  </section>
+</main>
+<div id="comments"></div>
+<footer class="site-f"><p>Estimación informativa. No es asesoría financiera, legal ni fiscal. Confirma montos y condiciones con la institución o un profesional.</p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/cetes.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, M = PTZ.money, E = PTZ.el;
+  var auction = {}, touched = false;
+  function num(id) { var v = parseFloat($(id).value); return isFinite(v) ? v : NaN; }
+  var body;
+  function row(k, v, strong) { body.appendChild(E('tr', { class: strong ? 'tot' : '' }, [E('th', { scope: 'row', text: k, style: 'font-weight:' + (strong ? '800' : '400') }), E('td', { class: 'n', text: v })])); }
+  function render() {
+    var out = $('out'); out.textContent = '';
+    var monto = num('monto'), dias = parseInt($('dias').value, 10), tasa = num('tasa'), inf = num('inf'), anios = num('anios');
+    if (!(monto >= 100) || !(tasa >= 0)) { out.appendChild(E('p', { text: 'Escribe un monto (mínimo $100) y una tasa válida.' })); return; }
+    var r = Cetes.inversion({ monto: monto, dias: dias, tasa: tasa, inflacion: isFinite(inf) ? inf : null });
+    out.appendChild(E('h2', { text: 'Resultado a ' + dias + ' días' }));
+    body = E('tbody'); out.appendChild(E('table', { class: 't' }, [body]));
+    row('Recibes al vencimiento', M(r.valorFinal), true);
+    row('Interés bruto', M(r.interes));
+    row('Retención de ISR (0.90% anual)', '− ' + M(r.retencion));
+    row('Ganancia neta', M(r.neto), true);
+    row('Rendimiento anual bruto (compuesto)', PTZ.pct(r.anualBruta * 100));
+    row('Rendimiento anual neto (compuesto)', PTZ.pct(r.anualNeta * 100));
+    if (r.real != null) row('Rendimiento real (vs. inflación)', PTZ.pct(r.real * 100), true);
+    row('Precio por título (valor nominal $10)', '$' + r.precio.toFixed(6));
+    if (anios > 0) {
+      var re = Cetes.reinversion({ monto: monto, dias: dias, tasa: tasa }, anios);
+      out.appendChild(E('p', { class: 'note', text: 'Reinvirtiendo ' + re.periodos + ' veces a la misma tasa en ' + anios + ' años: ' + M(re.valorFinal) + ' (ganancia neta ' + M(re.gananciaNeta) + '). La tasa real cambiará en cada subasta.' }));
+    }
+    var b = E('button', { class: 'btn ghost', type: 'button', text: 'Enviarme mis resultados' });
+    out.appendChild(E('div', { class: 'actions' }, [b]));
+    PTZ.mountEmail(b, function () {
+      var l = [{ k: 'Monto', v: M(monto) }, { k: 'Plazo', v: dias + ' días' }, { k: 'Tasa anual bruta', v: PTZ.pct(tasa) },
+        { k: 'Interés bruto', v: M(r.interes) }, { k: 'Retención de ISR', v: M(r.retencion) }, { k: 'Ganancia neta', v: M(r.neto) },
+        { k: 'Recibes al vencimiento', v: M(r.valorFinal) }, { k: 'Rendimiento anual neto', v: PTZ.pct(r.anualNeta * 100) }];
+      if (r.real != null) l.push({ k: 'Rendimiento real', v: PTZ.pct(r.real * 100) });
+      return { title: 'Mi inversión en CETES', lines: l };
+    });
+  }
+  function fillRate() {
+    var d = parseInt($('dias').value, 10), a = auction[d];
+    if (a && !touched) { $('tasa').value = a.value; $('tasa-src').textContent = 'Subasta de Banxico del ' + a.date + ' (editable).'; }
+  }
+  $('f').addEventListener('input', function (e) { if (e.target.id === 'tasa') touched = true; render(); });
+  $('dias').addEventListener('change', function () { touched = false; fillRate(); render(); });
+  $('f').addEventListener('submit', function (e) { e.preventDefault(); });
+  render();
+  fetch('data/indicators.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+    (j.items || []).forEach(function (it) {
+      if (it.id === 'SP30578' && isFinite(it.value)) { $('inf').value = it.value; $('inf-src').textContent = 'INPC anual publicado por INEGI/Banxico (' + it.date.slice(0, 7) + '), editable.'; }
+      if (it.id === 'SF282' && isFinite(it.value) && !Object.keys(auction).length) { $('tasa').value = it.value; $('tasa-src').textContent = 'Promedio mensual de CETES 28 días (' + it.date.slice(0, 7) + '), editable.'; }
+    });
+    (j.cetes || []).forEach(function (c) {
+      // solo se acepta si Banxico confirma en el título que es CETES al plazo esperado
+      if (isFinite(c.value) && /cetes/i.test(c.title || '') && new RegExp('\\b' + c.dias + '\\b').test(c.title || '')) auction[c.dias] = c;
+    });
+    fillRate(); render();
+  }).catch(function () {});
+  PTZ.mountComments($('comments'), 'CETES');
+})();
+</script>
+</body>
+</html>

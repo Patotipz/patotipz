@@ -17,12 +17,12 @@
     <span>Pato<span>tipz</span></span>
   </a>
   <nav aria-label="Principal">
-    <a href="index.html">Inicio</a><div class="grp cur"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html" aria-current="page">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html">Simulador de inversión</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
+    <a href="index.html">Inicio</a><div class="grp cur"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html" aria-current="page">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html">Simulador de inversión</a><a href="retiro.html">Retiro y PPR</a><a href="afores.html">Comparativo de Afores</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
   </nav>
 </header>
 <main>
   <h1>Simulador de crédito Infonavit</h1>
-  <p class="lead">Calcula la mensualidad y el costo de tu crédito con la tasa que te muestre tu precalificación, revisa el plazo que tu edad permite y compáralo contra un banco.</p>
+  <p class="lead">Calcula la mensualidad y el costo de tu crédito; la tasa se sugiere según tu salario, pero puedes cambiarla por la de tu precalificación, revisa el plazo que tu edad permite y compáralo contra un banco.</p>
   <div class="grid2">
     <form class="card" id="f-inf" novalidate>
       <h2>Tus datos</h2>
@@ -33,7 +33,7 @@
       <div class="field"><label for="i-sexo">Para la regla de edad y plazo</label><select id="i-sexo"><option value="h">Hombre (edad + plazo hasta 70)</option><option value="m">Mujer (edad + plazo hasta 75)</option></select></div>
       <div class="row2">
         <div class="field"><label for="i-monto">Monto del crédito ($)</label><input id="i-monto" type="number" inputmode="decimal" min="0" step="any" value="900000"><small>Tu monto real aparece en la precalificación de Mi Cuenta Infonavit.</small></div>
-        <div class="field"><label for="i-tasa">Tasa anual fija (%)</label><input id="i-tasa" type="number" inputmode="decimal" min="0" max="30" step="any" value="7"><small>Entre 3.69% y 10.45% según tu nivel salarial.</small></div>
+        <div class="field"><label for="i-tasa">Tasa anual fija (%)</label><input id="i-tasa" type="number" inputmode="decimal" min="0" max="30" step="any" value="7"><small id="i-tasa-h">Entre 3.69% y 10.45% según tu nivel salarial.</small></div>
       </div>
       <div class="row2">
         <div class="field"><label for="i-plazo">Plazo (años)</label><input id="i-plazo" type="number" inputmode="numeric" min="1" max="30" value="25"></div>
@@ -60,12 +60,18 @@
       </tbody></table></div>
     <p class="note">Tomado de la página de créditos para comprar vivienda del Infonavit (consultada en noviembre de 2026; los montos suelen actualizarse cada año). La tasa que te toca depende de tu salario y está en la tabla de tasas diferenciada y en tu precalificación en Mi Cuenta Infonavit. Este simulador usa pagos fijos de capital e interés. Tu descuento real puede incluir otros conceptos, como seguros, y el monto que te prestan depende de tu salario, tu ahorro en la Subcuenta de Vivienda, tu edad y tu capacidad de pago. Confirma todo en <a href="https://portalmx.infonavit.org.mx" rel="noopener">el portal del Infonavit</a>.</p>
   </details>
+  <details class="ref">
+    <summary>Tabla de tasas por nivel salarial</summary>
+    <div class="tbl-wrap"><table class="t" style="margin-top:10px"><thead><tr><th scope="col" class="n">Salario en UMA</th><th scope="col" class="n">Salario mensual</th><th scope="col" class="n">Tasa anual</th></tr></thead><tbody><tr><td class="n">hasta 2.6</td><td class="n">$9,272.18</td><td class="n">3.69%</td></tr><tr><td class="n">hasta 2.7</td><td class="n">$9,628.80</td><td class="n">3.88%</td></tr><tr><td class="n">hasta 2.8</td><td class="n">$9,985.43</td><td class="n">4.07%</td></tr><tr><td class="n">hasta 2.9</td><td class="n">$10,342.05</td><td class="n">4.26%</td></tr><tr><td class="n">hasta 3</td><td class="n">$10,698.67</td><td class="n">4.45%</td></tr><tr><td class="n">hasta 3.1</td><td class="n">$11,055.29</td><td class="n">4.64%</td></tr><tr><td class="n">hasta 3.2</td><td class="n">$11,411.92</td><td class="n">4.83%</td></tr><tr><td class="n">hasta 3.3</td><td class="n">$11,768.54</td><td class="n">5.02%</td></tr><tr><td class="n">hasta 3.4</td><td class="n">$12,125.16</td><td class="n">5.21%</td></tr><tr><td class="n">hasta 3.5</td><td class="n">$12,481.78</td><td class="n">5.40%</td></tr><tr><td class="n">hasta 3.6</td><td class="n">$12,838.41</td><td class="n">5.59%</td></tr><tr><td class="n">hasta 3.7</td><td class="n">$13,195.03</td><td class="n">5.78%</td></tr><tr><td class="n">hasta 3.8</td><td class="n">$13,551.65</td><td class="n">5.96%</td></tr><tr><td class="n">hasta 3.9</td><td class="n">$13,908.27</td><td class="n">6.15%</td></tr><tr><td class="n">hasta 4</td><td class="n">$14,264.90</td><td class="n">6.34%</td></tr><tr><td class="n">hasta 4.1</td><td class="n">$14,621.52</td><td class="n">6.53%</td></tr><tr><td class="n">hasta 4.2</td><td class="n">$14,978.14</td><td class="n">6.72%</td></tr><tr><td class="n">hasta 4.3</td><td class="n">$15,334.76</td><td class="n">6.91%</td></tr><tr><td class="n">hasta 4.4</td><td class="n">$15,691.39</td><td class="n">7.10%</td></tr><tr><td class="n">hasta 4.5</td><td class="n">$16,048.01</td><td class="n">7.29%</td></tr><tr><td class="n">hasta 4.6</td><td class="n">$16,404.63</td><td class="n">7.48%</td></tr><tr><td class="n">hasta 4.7</td><td class="n">$16,761.25</td><td class="n">7.67%</td></tr><tr><td class="n">hasta 4.8</td><td class="n">$17,117.88</td><td class="n">7.86%</td></tr><tr><td class="n">hasta 4.9</td><td class="n">$17,474.50</td><td class="n">8.05%</td></tr><tr><td class="n">hasta 5</td><td class="n">$17,831.12</td><td class="n">8.19%</td></tr><tr><td class="n">hasta 5.1</td><td class="n">$18,187.74</td><td class="n">8.33%</td></tr><tr><td class="n">hasta 5.2</td><td class="n">$18,544.36</td><td class="n">8.47%</td></tr><tr><td class="n">hasta 5.3</td><td class="n">$18,900.99</td><td class="n">8.61%</td></tr><tr><td class="n">hasta 5.4</td><td class="n">$19,257.61</td><td class="n">8.76%</td></tr><tr><td class="n">hasta 5.5</td><td class="n">$19,614.23</td><td class="n">8.90%</td></tr><tr><td class="n">hasta 5.6</td><td class="n">$19,970.85</td><td class="n">9.04%</td></tr><tr><td class="n">hasta 5.7</td><td class="n">$20,327.48</td><td class="n">9.18%</td></tr><tr><td class="n">hasta 5.8</td><td class="n">$20,684.10</td><td class="n">9.32%</td></tr><tr><td class="n">hasta 5.9</td><td class="n">$21,040.72</td><td class="n">9.46%</td></tr><tr><td class="n">hasta 6</td><td class="n">$21,397.34</td><td class="n">9.60%</td></tr><tr><td class="n">hasta 6.1</td><td class="n">$21,753.97</td><td class="n">9.74%</td></tr><tr><td class="n">hasta 6.2</td><td class="n">$22,110.59</td><td class="n">9.89%</td></tr><tr><td class="n">hasta 6.3</td><td class="n">$22,467.21</td><td class="n">10.03%</td></tr><tr><td class="n">hasta 6.4</td><td class="n">$22,823.83</td><td class="n">10.17%</td></tr><tr><td class="n">hasta 6.5</td><td class="n">$23,180.46</td><td class="n">10.31%</td></tr><tr><td class="n">6.6 UMA en adelante</td><td class="n">$23,537.08</td><td class="n">10.45%</td></tr></tbody></table></div>
+    <p class="note">Salario mensual calculado con la UMA mensual de 2026 ($3,566.22). Los extremos (3.69% y 10.45%) coinciden con el rango oficial de 2026. El Infonavit usa tu salario base de cotización: confirma tu tasa en Mi Cuenta Infonavit.</p>
+  </details>
 </main>
 <div id="comments"></div>
 <footer class="site-f"><p>Información general, no es asesoría financiera ni una oferta de crédito. Las condiciones finales las define cada institución. <a href="privacidad.html">Aviso de privacidad</a></p></footer>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
 <script src="assets/credito.js"></script>
+<script src="assets/infonavit.js"></script>
 <script>
 (function () {
   var M = PTZ.money, E = PTZ.el, MAX = 2935002.35;
@@ -77,7 +83,14 @@
     if (head) { var h = E('tr', {}, [E('th', { scope: 'col', text: '' })]); head.forEach(function (x) { h.appendChild(E('th', { scope: 'col', class: 'n', text: x })); }); t.insertBefore(E('thead', {}, [h]), b); }
     return E('div', { class: 'tbl-wrap' }, [t]);
   }
-  var host = document.getElementById('o-inf'), last = null;
+  var host = document.getElementById('o-inf'), last = null, manual = false;
+  function autoTasa() {
+    var sal = num('i-sal'), r = InfonavitTasas.tasaPara(sal), h = document.getElementById('i-tasa-h');
+    if (!r) return;
+    var lbl = sal > InfonavitTasas.TASAS[InfonavitTasas.TASAS.length - 1][1] ? 'más de 6.6 UMA' : 'hasta ' + r[0] + ' UMA';
+    h.textContent = 'Según la tabla de tasas por salario (' + lbl + '): ' + r[2].toFixed(2) + '%. Tu tasa real aparece en tu precalificación.';
+    if (!manual) document.getElementById('i-tasa').value = r[2];
+  }
   function render() {
     host.textContent = '';
     var sal = num('i-sal'), edad = num('i-edad'), monto = num('i-monto'), tasa = parseFloat(document.getElementById('i-tasa').value) || 0;
@@ -128,7 +141,10 @@
       { k: 'Intereses totales', v: M(inf.intereses) }, { k: 'Total pagado', v: M(inf.pagos) },
       { k: 'Comparación con banco (' + PTZ.pct(tb, 2) + ', ' + pb + ' años)', h: true }, { k: 'Mensualidad', v: M(banco.cuota) }, { k: 'Intereses totales', v: M(banco.intereses) }, { k: 'Total pagado', v: M(banco.pagos) }] };
   }
-  var f = document.getElementById('f-inf'); f.addEventListener('input', render); f.addEventListener('change', render); f.addEventListener('submit', function (e) { e.preventDefault(); });
+  var f = document.getElementById('f-inf');
+  f.addEventListener('input', function (e) { if (e.target.id === 'i-tasa') manual = true; if (e.target.id === 'i-sal') { manual = false; autoTasa(); } });
+  autoTasa();
+  f.addEventListener('input', render); f.addEventListener('change', render); f.addEventListener('submit', function (e) { e.preventDefault(); });
   render();
   PTZ.mountComments(document.getElementById('comments'), 'Infonavit');
 })();

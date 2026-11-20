@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparativo de Afores por edad (octubre 2026) | Patotipz</title>
+<meta name="description" content="Rendimiento neto de las Afores de México por Siefore y año de nacimiento, con cifras de CONSAR al cierre de octubre 2026. Compara tu Afore contra el promedio.">
+<link rel="icon" type="image/png" href="assets/duck.png">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">
+    <img src="assets/duck.png" alt="PatoTipz Logo" class="brand-logo">
+    <span>Pato<span>tipz</span></span>
+  </a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp cur"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html">Simulador de inversión</a><a href="retiro.html" aria-current="page">Retiro y PPR</a><a href="afores.html">Comparativo de Afores</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
+  </nav>
+</header>
+<main>
+  <h1>Comparativo de Afores por edad</h1>
+  <p class="lead">Rendimiento neto de cada Afore según tu año de nacimiento. Cifras de CONSAR al cierre de <strong id="corte">octubre 2026</strong>.</p>
+
+  <section class="grid2">
+    <form class="card" id="f" novalidate>
+      <h2>Tus datos</h2>
+      <div class="row2">
+        <div class="field"><label for="anio">Año de nacimiento</label><input id="anio" type="number" inputmode="numeric" min="1930" max="2010" step="1" value="1995"></div>
+        <div class="field"><label for="sie">Siefore (se elige sola)</label><select id="sie"></select></div>
+      </div>
+      <div class="field"><label for="mia">Mi Afore (opcional)</label><select id="mia"><option value="">— Elige tu Afore —</option></select></div>
+      <p class="note" id="sie-d"></p>
+    </form>
+    <div class="card soft" aria-live="polite" id="mi"></div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2 id="tt">Rendimiento neto</h2>
+    <div class="tbl-wrap"><table class="t" id="tab"><thead><tr><th scope="col" class="n">#</th><th scope="col">Afore</th><th scope="col" class="n">Rendimiento neto</th><th scope="col" class="n">Frente al promedio simple</th></tr></thead><tbody></tbody></table></div>
+    <div class="actions"><button class="btn ghost" id="csv" type="button">Descargar CSV</button> <a class="btn ghost" id="toret" href="retiro.html">Usar este rendimiento en mi plan de retiro</a></div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>Cómo leerlo</h2>
+    <ul>
+      <li>Es el rendimiento neto que CONSAR publica por Siefore. Revisa en <a href="https://www.gob.mx/consar" target="_blank" rel="noopener noreferrer">gob.mx/consar</a> el plazo que mide y cómo se calcula.</li>
+      <li><strong>El rendimiento pasado no garantiza el futuro.</strong> El orden cambia de un mes a otro y una Afore que lidera una Siefore puede no hacerlo en otra.</li>
+      <li>La Siefore depende de tu año de nacimiento. Si naciste entre 1995 y 1999 también puedes ver la Siefore Inicial en el selector.</li>
+      <li>Puedes cambiarte de Afore; el trámite es con la Afore destino o en la app AforeMóvil.</li>
+    </ul>
+    <p class="note">Información general, no es una recomendación de inversión ni de cambio de Afore. Los datos se capturaron a mano desde la publicación de CONSAR: confirma siempre en la fuente.</p>
+  </section>
+</main>
+<div id="comments"></div>
+<footer class="site-f"><p>Estimación informativa; las tasas futuras no están garantizadas. No es asesoría financiera, legal ni fiscal. Confirma montos y condiciones con la institución o un profesional.</p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/afores-data.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, E = PTZ.el, D = window.AFORES_DATA, S = D.siefores;
+  var HOY = new Date().getFullYear();
+  function sieforeDe(anio) {
+    if (anio >= 2000) return 'SBI'; if (anio >= 1995) return 'SB9599'; if (anio >= 1990) return 'SB9094'; if (anio >= 1985) return 'SB8589';
+    if (anio >= 1980) return 'SB8084'; if (anio >= 1975) return 'SB7579'; if (anio >= 1970) return 'SB7074'; if (anio >= 1965) return 'SB6569';
+    if (anio >= 1960) return 'SB6064'; return 'SB0';
+  }
+  function nom(s) { return s.id === 'SBI' ? 'Básica Inicial' : s.nombre; }
+  S.forEach(function (s) { $('sie').appendChild(E('option', { value: s.id, text: 'Siefore ' + nom(s) })); });
+  var nombres = []; S[0].afores.forEach(function (a) { nombres.push(a[0]); }); nombres.sort();
+  nombres.forEach(function (n) { $('mia').appendChild(E('option', { value: n, text: n })); });
+  $('corte').textContent = D.corte;
+  function pp(x) { return (x >= 0 ? '+' : '−') + Math.abs(x).toFixed(2) + ' pts'; }
+  function cur() { return S.filter(function (x) { return x.id === $('sie').value; })[0]; }
+  function render() {
+    var s = cur(), mia = $('mia').value;
+    $('sie-d').textContent = s.desc + '.';
+    $('tt').textContent = 'Rendimiento neto, Siefore ' + nom(s) + ' (cierre de ' + D.corte + ')';
+    var body = $('tab').tBodies[0]; body.textContent = '';
+    s.afores.forEach(function (a, i) {
+      var me = a[0] === mia;
+      body.appendChild(E('tr', { class: me ? 'tot' : '' }, [E('td', { class: 'n', text: String(i + 1) }), E('th', { scope: 'row', text: a[0], style: 'font-weight:' + (me ? '800' : '400') }), E('td', { class: 'n', text: a[1].toFixed(2) + '%' }), E('td', { class: 'n', text: pp(a[1] - s.ps) })]));
+    });
+    [['Promedio simple', s.ps], ['Promedio ponderado', s.pp]].forEach(function (r) { body.appendChild(E('tr', {}, [E('td'), E('th', { scope: 'row', text: r[0], style: 'font-weight:700' }), E('td', { class: 'n', text: r[1].toFixed(2) + '%' }), E('td')])); });
+    $('toret').href = 'retiro.html#tasa=' + s.ps;
+    var box = $('mi'); box.textContent = '';
+    if (!mia) { box.appendChild(E('p', { text: 'Elige tu Afore para ver cómo se compara con las demás en tu Siefore.' })); return; }
+    var idx = -1, v = null; s.afores.forEach(function (a, i) { if (a[0] === mia) { idx = i; v = a[1]; } });
+    var best = s.afores[0], worst = s.afores[s.afores.length - 1];
+    box.appendChild(E('h2', { text: mia }));
+    box.appendChild(E('div', { class: 'big', text: v.toFixed(2) + '%' }));
+    box.appendChild(E('p', { text: 'Lugar ' + (idx + 1) + ' de ' + s.afores.length + ' en la Siefore ' + nom(s) + '. ' + pp(v - s.ps) + ' frente al promedio simple (' + s.ps.toFixed(2) + '%).' }));
+    box.appendChild(E('p', { class: 'note', text: 'Rango entre Afores: de ' + worst[1].toFixed(2) + '% (' + worst[0] + ') a ' + best[1].toFixed(2) + '% (' + best[0] + '). El pasado no garantiza el futuro, pero una diferencia sostenida por décadas sí cambia mucho el saldo.' }));
+  }
+  function setSie() { var a = parseInt($('anio').value, 10); if (a >= 1930 && a <= HOY) $('sie').value = sieforeDe(a); render(); }
+  $('anio').addEventListener('input', setSie); $('sie').addEventListener('change', render); $('mia').addEventListener('change', render);
+  $('f').addEventListener('submit', function (e) { e.preventDefault(); });
+  $('csv').addEventListener('click', function () {
+    var s = cur(), rows = [['Afore', 'Rendimiento neto %', 'Siefore', 'Corte']]; s.afores.forEach(function (a) { rows.push([a[0], a[1], s.nombre, D.corte]); });
+    PTZ.downloadCSV('afores-' + s.id + '.csv', rows);
+  });
+  setSie();
+  PTZ.mountComments($('comments'), 'Afores');
+})();
+</script>
+<script src="assets/nav.js"></script>
+</body>
+</html>

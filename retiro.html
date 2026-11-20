@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retiro y PPR: cuánto deduces y cuánto juntas | Patotipz</title>
+<meta name="description" content="Calcula cuánto puedes deducir de ISR por aportaciones a tu PPR o Afore voluntaria en 2026 y proyecta cuánto juntarías para tu retiro, en pesos de hoy.">
+<link rel="icon" type="image/png" href="assets/duck.png">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/widgets.css">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<header class="site-h">
+  <a class="brand" href="index.html">
+    <img src="assets/duck.png" alt="PatoTipz Logo" class="brand-logo">
+    <span>Pato<span>tipz</span></span>
+  </a>
+  <nav aria-label="Principal">
+    <a href="index.html">Inicio</a><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Créditos</button><div class="sub"><a href="hipoteca.html">Hipoteca</a><a href="infonavit.html">Infonavit</a><a href="auto.html">Crédito de auto</a></div></div><div class="grp cur"><button type="button" aria-expanded="false" aria-haspopup="true">Ahorro e inversión</button><div class="sub"><a href="cetes.html">CETES</a><a href="inversion.html">Simulador de inversión</a><a href="retiro.html" aria-current="page">Retiro y PPR</a><a href="afores.html">Comparativo de Afores</a></div></div><div class="grp"><button type="button" aria-expanded="false" aria-haspopup="true">Día a día</button><div class="sub"><a href="tarjetas.html">Tarjetas de crédito</a><a href="sueldo.html">Sueldo y finiquito</a></div></div>
+  </nav>
+</header>
+<main>
+  <h1>Retiro y PPR</h1>
+  <p class="lead">Dos cuentas en una: cuánto te ahorras de ISR al aportar a tu retiro y cuánto tendrías a tu edad de retiro, en pesos de hoy.</p>
+
+  <form id="f" novalidate>
+  <section class="grid2">
+    <div class="card">
+      <h2>Tus datos fiscales</h2>
+      <div class="field"><label for="ing">Ingresos acumulables del año</label><input id="ing" type="number" inputmode="decimal" min="0" step="1000" value="450000"><small>Sueldos, aguinaldo y demás ingresos gravables, antes de impuestos.</small></div>
+      <div class="field"><label for="otras">Otras deducciones personales del año</label><input id="otras" type="number" inputmode="decimal" min="0" step="1000" value="0"><small>Médicos, colegiaturas, intereses hipotecarios, etc. Opcional.</small></div>
+      <div class="field"><label for="apm">Aportación mensual a tu retiro (PPR o Afore voluntaria)</label><input id="apm" type="number" inputmode="decimal" min="0" step="100" value="3000"></div>
+    </div>
+    <div class="card soft" aria-live="polite" id="o-fisc"></div>
+  </section>
+
+  <section class="grid2" style="margin-top:18px">
+    <div class="card">
+      <h2>Tu retiro</h2>
+      <div class="row2">
+        <div class="field"><label for="edad">Edad actual</label><input id="edad" type="number" inputmode="numeric" min="18" max="80" step="1" value="30"></div>
+        <div class="field"><label for="edadr">Edad de retiro</label><input id="edadr" type="number" inputmode="numeric" min="50" max="90" step="1" value="65"><small>Retirar antes de los 65 suele causar ISR.</small></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="ini">Saldo actual</label><input id="ini" type="number" inputmode="decimal" min="0" step="1000" value="0"></div>
+        <div class="field"><label for="tasa">Rendimiento anual supuesto (%)</label><input id="tasa" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="7"><small>Es un supuesto tuyo, no una promesa de ningún producto.</small></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="inf">Inflación anual (%)</label><input id="inf" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="4"></div>
+        <div class="field"><label for="crece">Tu aportación sube cada año (%)</label><input id="crece" type="number" inputmode="decimal" min="0" max="30" step="0.5" value="0"></div>
+      </div>
+      <div class="field"><label for="rp">Retiro anual sostenible (% del saldo)</label><input id="rp" type="number" inputmode="decimal" min="1" max="10" step="0.5" value="4"><small>Regla práctica: con 4% al año, el dinero suele durar décadas. Es un supuesto.</small></div>
+    </div>
+    <div class="card soft" aria-live="polite" id="o-ret"></div>
+  </section>
+  </form>
+
+  <section class="card" style="margin-top:18px">
+    <h2>Cómo funciona</h2>
+    <ul>
+      <li><strong>Deducción</strong> (LISR art. 151, fracc. V): puedes deducir tus aportaciones a planes personales de retiro o a la subcuenta de aportaciones voluntarias de tu Afore hasta el <strong>menor</strong> entre 10% de tus ingresos acumulables y 5 UMA anuales ($214,090.75 en 2026). Esta deducción no cuenta dentro del límite global de deducciones personales.</li>
+      <li>El ahorro de ISR se estima con la tarifa vigente y se obtiene como saldo a favor en tu declaración anual (o ajustado por tu empleador). El cálculo exacto depende de tu caso: es una estimación.</li>
+      <li>Para que sea deducible, el plan debe cumplir los requisitos de la ley (por ejemplo, que solo puedas retirar al llegar a los 65 años, o por invalidez o incapacidad). Retirar antes causa ISR sobre lo deducido y sus rendimientos.</li>
+      <li>"Pesos de hoy" divide el saldo entre la inflación acumulada hasta tu retiro.</li>
+    </ul>
+    <p class="note">Para el rendimiento de tu Afore por edad, revisa el <a href="afores.html">comparativo de Afores</a>. Los PPR dependen de cada producto: consulta la información oficial de cada institución.</p>
+  </section>
+</main>
+<div id="comments"></div>
+<footer class="site-f"><p>Estimación informativa; las tasas futuras no están garantizadas. No es asesoría financiera, legal ni fiscal. Confirma montos y condiciones con la institución o un profesional.</p></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/retiro.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, M = PTZ.money, M0 = PTZ.money0, E = PTZ.el;
+  function num(id) { var v = parseFloat($(id).value); return isFinite(v) ? v : NaN; }
+  function tbl(rows) {
+    var b = E('tbody');
+    rows.forEach(function (r) { b.appendChild(E('tr', { class: r.t ? 'tot' : '' }, [E('th', { scope: 'row', text: r.k, style: 'font-weight:' + (r.t ? '800' : '400') }), E('td', { class: 'n', text: r.v })])); });
+    return E('table', { class: 't' }, [b]);
+  }
+  function render() {
+    var f = $('o-fisc'), r = $('o-ret'); f.textContent = ''; r.textContent = '';
+    var ing = num('ing'), otras = num('otras') || 0, apm = num('apm'), edad = num('edad'), edadr = num('edadr'), ini = num('ini') || 0,
+        tasa = num('tasa'), inf = num('inf'), crece = num('crece') || 0, rp = num('rp');
+    var okF = ing > 0 && apm >= 0;
+    if (!okF) f.appendChild(E('p', { text: 'Escribe tus ingresos del año y tu aportación mensual.' }));
+    var d = null, lines = [];
+    if (okF) {
+      d = Retiro.deduccion({ ingresos: ing, otras: otras, aporteAnual: apm * 12 });
+      f.appendChild(E('h2', { text: 'Tu deducción en 2026' }));
+      f.appendChild(tbl([
+        { k: 'Aportas al año', v: M0(apm * 12) },
+        { k: 'Tu tope deducible', v: M0(d.tope) },
+        { k: 'Lo limita', v: d.limita },
+        { k: 'Monto deducible', v: M0(d.deducible), t: true },
+        { k: 'Tasa marginal de ISR', v: PTZ.pct(d.marginal, 2) },
+        { k: 'ISR que te ahorras (aprox.)', v: M0(d.ahorro), t: true },
+        { k: 'Costo real de tu aportación', v: M0(d.costoNeto) + ' al año' }]));
+      if (d.excedente > 0) f.appendChild(E('p', { class: 'note', text: 'Aportas ' + M0(d.excedente) + ' más del tope deducible: esa parte no reduce tu ISR. Para aprovechar el tope, tu aportación mensual ideal es ' + M0(d.tope / 12) + '.' }));
+      else if (d.tope - d.deducible > 1) f.appendChild(E('p', { class: 'note', text: 'Aún puedes aportar hasta ' + M0(d.tope - d.deducible) + ' más este año y deducirlo.' }));
+      lines = [{ k: 'Ingresos del año', v: M0(ing) }, { k: 'Aportación anual', v: M0(apm * 12) }, { k: 'Monto deducible', v: M0(d.deducible) }, { k: 'ISR que te ahorras (aprox.)', v: M0(d.ahorro) }];
+    }
+    var okR = apm >= 0 && edad >= 18 && edadr > edad && tasa >= 0 && inf >= 0 && rp > 0;
+    var p = null;
+    if (!okR) r.appendChild(E('p', { text: 'Revisa tus datos: la edad de retiro debe ser mayor que tu edad actual.' }));
+    else {
+      p = Retiro.proyeccion({ edad: edad, edadRetiro: edadr, inicial: ini, mensual: apm, tasa: tasa, inflacion: inf, crece: crece, retiroPct: rp });
+      r.appendChild(E('h2', { text: 'A los ' + edadr + ' años (en ' + Math.round(p.meses / 12) + ' años)' }));
+      r.appendChild(tbl([
+        { k: 'Total que habrás aportado', v: M0(p.aportado) },
+        { k: 'Saldo estimado', v: M0(p.final), t: true },
+        { k: 'Saldo en pesos de hoy', v: M0(p.real), t: true },
+        { k: 'Renta mensual en pesos de hoy (' + PTZ.pct(rp, 1) + ' anual)', v: M0(p.rentaMensualReal) }]));
+      r.appendChild(E('p', { class: 'note', text: 'No incluye ISR al retirar, comisiones del producto ni la pensión de tu Afore obligatoria. Rendimientos reales pueden ser distintos.' }));
+      lines = lines.concat([{ k: 'Edad actual / de retiro', v: edad + ' / ' + edadr }, { k: 'Rendimiento supuesto', v: PTZ.pct(tasa) }, { k: 'Saldo estimado', v: M0(p.final) }, { k: 'Saldo en pesos de hoy', v: M0(p.real) }, { k: 'Renta mensual en pesos de hoy', v: M0(p.rentaMensualReal) }]);
+    }
+    if (lines.length) {
+      var b = E('button', { class: 'btn ghost', type: 'button', text: 'Enviarme mis resultados' });
+      r.appendChild(E('div', { class: 'actions' }, [b]));
+      PTZ.mountEmail(b, function () { return { title: 'Mi plan de retiro y deducción fiscal', lines: lines }; });
+    }
+  }
+  $('f').addEventListener('input', render); $('f').addEventListener('submit', function (e) { e.preventDefault(); });
+  var mh = /[#&]tasa=([\d.]+)/.exec(location.hash); if (mh && isFinite(parseFloat(mh[1]))) $('tasa').value = parseFloat(mh[1]);
+  render();
+  fetch('data/indicators.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+    (j.items || []).forEach(function (it) { if (it.id === 'SP30578' && isFinite(it.value)) { $('inf').value = it.value; render(); } });
+  }).catch(function () {});
+  PTZ.mountComments($('comments'), 'Retiro');
+})();
+</script>
+</body>
+</html>

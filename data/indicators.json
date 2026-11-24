@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T20:26:23.605387+00:00",
+ "updated": "2026-11-24T20:27:59.675441+00:00",
  "source": "Banco de México (SIE)",
  "items": [
   {
@@ -7,8 +7,8 @@
    "label": "Dólar (FIX)",
    "kind": "mxn",
    "decimals": 4,
-   "value": 19.1648,
-   "date": "2026-11-23",
+   "value": 19.3668,
+   "date": "2026-11-24",
    "title": "Tipo de cambio                                          Pesos por dólar E.U.A. Tipo de cambio para solventar obligaciones denominadas en moneda extranjera Fecha de determinación (FIX)"
   },
   {
@@ -16,8 +16,8 @@
    "label": "TIIE 28 días",
    "kind": "pct",
    "decimals": 4,
-   "value": 6.5449,
-   "date": "2026-11-24",
+   "value": 6.5549,
+   "date": "2026-11-25",
    "title": "TIIE a 28 días Tasa de interés en por ciento anual"
   },
   {
@@ -34,8 +34,8 @@
    "label": "UDI",
    "kind": "mxn",
    "decimals": 6,
-   "value": 8.932476,
-   "date": "2026-11-25",
+   "value": 8.980803,
+   "date": "2026-12-10",
    "title": "Valor de UDIS"
   },
   {
@@ -52,29 +52,29 @@
   {
    "id": "SF43936",
    "dias": 28,
-   "value": 6.19,
-   "date": "2026-11-19",
+   "value": 6.2,
+   "date": "2026-11-26",
    "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 28 días"
   },
   {
    "id": "SF43939",
    "dias": 91,
    "value": 6.49,
-   "date": "2026-11-19",
+   "date": "2026-11-26",
    "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 91 días"
   },
   {
    "id": "SF43942",
    "dias": 182,
-   "value": 6.67,
-   "date": "2026-11-19",
+   "value": 6.66,
+   "date": "2026-11-26",
    "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 182 días"
   },
   {
    "id": "SF43945",
    "dias": 364,
-   "value": 6.95,
-   "date": "2026-11-12",
+   "value": 6.88,
+   "date": "2026-11-26",
    "title": "Valores gubernamentales                        Resultados de la subasta semanal Tasa de rendimiento                            Cetes a 364 días"
   }
  ]

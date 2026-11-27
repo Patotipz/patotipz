@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T20:29:46.651930+00:00",
+ "updated": "2026-11-27T20:30:13.357091+00:00",
  "source": "Banco de México (SIE)",
  "items": [
   {
@@ -7,8 +7,8 @@
    "label": "Dólar (FIX)",
    "kind": "mxn",
    "decimals": 4,
-   "value": 19.7203,
-   "date": "2026-11-26",
+   "value": 19.6598,
+   "date": "2026-11-27",
    "title": "Tipo de cambio                                          Pesos por dólar E.U.A. Tipo de cambio para solventar obligaciones denominadas en moneda extranjera Fecha de determinación (FIX)"
   },
   {
@@ -17,7 +17,7 @@
    "kind": "pct",
    "decimals": 4,
    "value": 6.6353,
-   "date": "2026-11-27",
+   "date": "2026-11-30",
    "title": "TIIE a 28 días Tasa de interés en por ciento anual"
   },
   {
